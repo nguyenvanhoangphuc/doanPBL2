@@ -1,0 +1,3 @@
+class diemso {
+    int diemso;
+}
