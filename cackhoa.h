@@ -1,4 +1,9 @@
+#include <iostream>
+using namespace std; 
 class cackhoa{
-    // nguyen van manh 
-    string tenkhoa;
+private:
+    string maKhoa, tenKhoa, nguoiQuanLi; 
+    int soCanBo, soSinhVien, namThanhLap; 
+public: 
+    
 };

@@ -1,15 +1,16 @@
 #include <iostream>
-using namespace std; 
-class Sinhvien {
-    private: 
-        string ma_sv;
-        string tendem; 
-        string ten; 
-        string ngay_sinh;
-        bool gioitinh; 
-        string lop; 
-        string sodth;  
-        string ngay_dk; 
-        string ma_khoa; 
-        string quequan;   
-}; 
+using namespace std;
+#ifndef SINHVIEN_H
+#define SINHVIEN_H
+class SinhVien
+{
+    string maSV, hoTen, ngaySinh, lop, sdt, maKhoa, queQuan;
+    bool  gioiTinh; 
+public:
+    SinhVien(string = "No", string  = "No", string  = "No", bool =0, string  = "No",
+                     string  = "No", string  = "No", string  = "No");
+    ~SinhVien() {}
+    void Xuat();
+    void Nhap(); 
+};
+#endif
