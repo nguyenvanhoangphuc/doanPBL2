@@ -1,3 +1,4 @@
+#pragma once
 #include "sinhvien.h"
 class danhsachsinhvien
 {
@@ -6,8 +7,8 @@ private:
     SinhVien *list;
 public:
     danhsachsinhvien();
-    danhsachsinhvien(int);
     ~danhsachsinhvien(); 
-    void Nhap(); 
+    void Nhaptufile(); 
     void Xuat(); 
+    void themSV(); 
 }; 

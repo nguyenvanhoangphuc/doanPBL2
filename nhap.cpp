@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include "sinhvien.h"
+#include "sinhvien.h"   
 #include <iomanip>
 void themsv(SinhVien *DSSV[], int &n);
 void hienthisv(SinhVien *DSSV[], int n);
@@ -44,11 +44,35 @@ int main()
         triet = stod(tempString);
         getline(cc, tempString, ',');
         av = stod(tempString);
-        DSSV[n++] = new SinhVien(masv, hoten, namsinh, gioitinh, lop, sdt, makhoa, quequan, toan, ly, tin, triet, av);
+        DSSV[n++] = new SinhVien(masv, hoten, namsinh, gioitinh, lop, sdt, makhoa, quequan);
     }
     file.close();
     file1.close();
 
+    
+int choice;
+    char x;
+    cout << "Enter Your Choose: ";    
+    cin >> choice;
+    switch (choice)
+    {
+    case 0:
+        exit(0);
+    case 1:
+        do
+        {
+            themsv(DSSV, n);
+            cout << "\n\t\t\t Them sinh vien khac (Y,N): ";
+            cin >> x;
+        } while (x == 'y' || x == 'Y');
+        break;
+    case 2:
+        hienthisv(DSSV, n);
+        break;
+    default:
+        cout << "\n\t\t\tLua chon khong ton tai...";
+        system("pause");
+    }
 menustart:
     int choice;
     char x;
@@ -125,7 +149,7 @@ void themsv(SinhVien *DSSV[], int &n)
     cin >> triet;
     cout << "\t\t\tNhap diem anh van: ";
     cin >> av;
-    DSSV[n++] = new SinhVien(masv, hoten, namsinh, gioitinh, lop, sdt, makhoa, quequan, toan, ly, tin, triet, av);
+    DSSV[n++] = new SinhVien(masv, hoten, namsinh, gioitinh, lop, sdt, makhoa, quequan);
     file.open("sinhvien.txt", ios::app | ios::out);
     file1.open("diem.txt", ios::app | ios::out);
     file << masv << "," << hoten << "," << namsinh << "," << gioitinh << "," << lop << "," << sdt << "," << makhoa << "," << quequan << endl;
