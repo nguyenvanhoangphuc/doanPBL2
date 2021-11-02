@@ -10,7 +10,7 @@ SinhVien::SinhVien(string maSV, string hoTen, string ngaySinh, bool gioiTinh, st
     this->hoTen=hoTen;
     this->ngaySinh=ngaySinh; 
     this->gioiTinh=gioiTinh; 
-    this->lop=lop; 
+    this->lop=lop;      
     this->sdt=sdt; 
     this->maKhoa=maKhoa; 
     this->queQuan=queQuan; 

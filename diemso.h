@@ -5,7 +5,7 @@ private:
     int hocBong;
 public: 
     diemso(float=0,float=0,float=0,float=0,float=0,float=0,int=0);
-    void tinhDTBvaHB(); 
+    bool tinhDTBvaHB(); 
     void Nhaptufile(); 
     void Xuat();  
     friend class SinhVien;

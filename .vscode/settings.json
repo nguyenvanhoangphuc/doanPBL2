@@ -4,6 +4,8 @@
         "iomanip": "cpp",
         "iostream": "cpp",
         "*.tcc": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "type_traits": "cpp",
+        "random": "cpp"
     }
 }

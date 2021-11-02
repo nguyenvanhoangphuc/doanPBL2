@@ -20,12 +20,14 @@ void diemso::Xuat() {
     cout<<setw(6)<<toan<<setw(6)<<ly<<setw(6)<<tin<<setw(8)<<triet<<setw(6)<<anhVan
     <<setw(6)<<dtb<<setw(12)<<hocBong<<endl; 
 }
-void diemso::tinhDTBvaHB() {
+bool diemso::tinhDTBvaHB() {
+    int i=0; 
     dtb=(toan + ly + tin + triet + anhVan) / 5;
     if (dtb >= 8)
-        hocBong = 200;
+        hocBong = 200,i=1;
     else if (dtb >= 7)
-        hocBong = 100;
+        hocBong = 100,i=1;
     else
         hocBong = 0;
+    return i; 
 }
