@@ -20,7 +20,6 @@ void danhsachsinhvien::Nhaptufile() {
     fileIn1.open("txtdiemso.txt",ios::in); 
     while (!fileIn.eof()) {
         getline(fileIn, line);
-        cout<<line<<endl; 
         stringstream ss(line);
         getline(ss, list[soLuongSV].maSV, ',');
         if (list[soLuongSV].maSV.empty())
@@ -34,10 +33,8 @@ void danhsachsinhvien::Nhaptufile() {
         getline(ss, list[soLuongSV].sdt, ',');
         getline(ss, list[soLuongSV].maKhoa, ',');
         getline(ss, list[soLuongSV].queQuan, ',');
-        cout<<list[soLuongSV].maSV<<endl; 
         //file diem so
         getline(fileIn1, line);
-        cout<<line<<endl;
         stringstream cc(line);
         getline(cc, tempString, ',');
         getline(cc, tempString, ',');

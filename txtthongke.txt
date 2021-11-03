@@ -1,1 +1,11 @@
-so lượng nam nam,nữ của trường, mỗi khoá: 
+Thống kê số nam nữ: 
++ Của toàn trường
++ Của mỗi khoa
++ Của mỗi lớp 
+Thống kê số sinh viên theo khoá. (Dựa vào 2 chữ số đầu của lớp).
+Thống kê số sinh viên đạt học bổng 200 / 100 / không đạt học bổng.
+Thống kê số sinh viên mỗi khoa. (Dựa vào mã khoa)
+Thống kê số sinh viên theo tỉnh thành. 
+Thống kê sinh viên giỏi, khá , trung bình , yếu. 
+
+
