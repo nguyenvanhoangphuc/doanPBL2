@@ -19,7 +19,12 @@ public:
     danhsachsinhvien &tktheogioiTinh(bool); 
     danhsachsinhvien &tktheodtb(float); 
     void sapXepSV(); 
+    void sxtheomaSV();
+    void sxtheohoTen(); 
+    void sxtheolop(); 
+    void sxtheodtb();
     void suaSV(); 
     void xoaSV(); 
+    void xoaSVtheomaSV(string);
     void thongKeSV(); 
 }; 

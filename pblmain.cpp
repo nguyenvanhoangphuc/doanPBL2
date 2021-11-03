@@ -20,7 +20,8 @@ int main() {
         int choice;
         char x;
         cout << "Enter Your Choose: ";    
-        do {cin >> choice; if (choice>=0&&choice<=7) break; } while (1); 
+        do {cin >> choice; if (choice>=0&&choice<=7) break;
+        else cout<<"Khong hop le. Nhap lai: "; } while (1); 
         switch (choice)
         {
         case 0:exit(0);

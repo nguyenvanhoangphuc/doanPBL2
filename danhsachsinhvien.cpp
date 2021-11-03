@@ -83,10 +83,9 @@ void danhsachsinhvien::timKiemSV() {
         cout<<"4. Danh sach sinh vien có hoc bong.\n";
         cout<<"5. Theo gioi tinh.\n";
         cout<<"6. Theo muc diem trung binh.\n";
-        cout<<"7. Theo muc diem toan, li , tin, triet, anh van.\n";
         cout<<"0. Khong tim kiem nua.\n"; 
         cout<<"Lua chon cua ban la? "; 
-        do {cin>>chon; if (chon>=0&&chon<=7) break; } while(1);  
+        do {cin>>chon; if (chon>=0&&chon<=6) break; } while(1);  
         string masv,hoten,lopp;
         bool b;
         switch (chon)
@@ -123,8 +122,6 @@ void danhsachsinhvien::timKiemSV() {
             float dtbb; 
             cout<<"Nhap muc diem trung binh? "; cin>>dtbb;
             tktheodtb(dtbb).Xuat();
-            break;
-        case 7:
             break;
         case 0:
             break;
@@ -212,22 +209,30 @@ void danhsachsinhvien::sapXepSV() {
         cout<<"2. Theo ho ten sinh vien (alphabet).\n";
         cout<<"3. Theo lop.\n";
         cout<<"4. Theo muc diem trung binh.\n";
-        cout<<"5. Theo muc diem toan, li , tin, triet, anh van.\n";
         cout<<"0. Khong sap xep nua.\n"; 
         cout<<"Lua chon cua ban la? "; 
-        do {cin>>chon; if (chon>=0&&chon<=5) break; } while(1);  
+        do {cin>>chon; if (chon>=0&&chon<=4) break; } while(1);  
         switch (chon)
         {
         case 1:
-
+            sxtheomaSV(); 
+            cout<<"Danh sach da sap xep theo ma sinh vien. \n"; 
+            Xuat();
             break;
         case 2:
+            sxtheohoTen(); 
+            cout<<"Danh sach da sap xep theo ho ten sinh vien. \n"; 
+            Xuat();
             break;
         case 3:
+            sxtheolop(); 
+            cout<<"Danh sach da sap xep theo lop. \n"; 
+            Xuat();
             break;
         case 4:
-            break;
-        case 5:
+            sxtheodtb(); 
+            cout<<"Danh sach da sap xep theo diem trung binh. \n"; 
+            Xuat();
             break;
         case 0:
             break;
@@ -239,20 +244,64 @@ void danhsachsinhvien::sapXepSV() {
         if (choice=='N'||choice=='n') break; 
     } while (1); 
 }
+void danhsachsinhvien::sxtheomaSV() {
+    for (int i=1; i<soLuongSV; i++) {
+        for (int j=i-1; j>=0; j--) {
+            if(list[j].maSV>list[j+1].maSV) {
+                SinhVien temp=list[j]; 
+                list[j]=list[j+1];
+                list[j+1]=temp;  
+            }
+        }
+    }
+}
+void danhsachsinhvien::sxtheohoTen() {
+    for (int i=1; i<soLuongSV; i++) {
+        for (int j=i-1; j>=0; j--) {
+            if(list[j].hoTen>list[j+1].hoTen) {
+                SinhVien temp=list[j]; 
+                list[j]=list[j+1];
+                list[j+1]=temp;  
+            }
+        }
+    }
+}
+void danhsachsinhvien::sxtheolop() {
+    for (int i=1; i<soLuongSV; i++) {
+        for (int j=i-1; j>=0; j--) {
+            if(list[j].lop>list[j+1].lop) {
+                SinhVien temp=list[j]; 
+                list[j]=list[j+1];
+                list[j+1]=temp;  
+            }
+        }
+    }
+}
+void danhsachsinhvien::sxtheodtb() {
+    for (int i=1; i<soLuongSV; i++) {
+        for (int j=i-1; j>=0; j--) {
+            if(list[j].diem.dtb>list[j+1].diem.dtb) {
+                SinhVien temp=list[j]; 
+                list[j]=list[j+1];
+                list[j+1]=temp;  
+            }
+        }
+    }
+}
 void danhsachsinhvien::suaSV() {
     do {
         int chon; 
-        string masv; 
+        string masv=" "; 
         cout<<"Chon sinh vien ban muon sua theo ma so sinh vien: "<<endl;
         cout<<"1. Nhap       2. Tim kiem.       0. khong sua nua.\n"; 
         cout<<"lua chon cua ban? ";  
         do {cin>>chon; if (chon>=0&&chon<=2) break;} while (1);   
         switch (chon)
         {
-        case 1:cout<<"ma sinh vien :"; cin>>masv; break;
+        case 1:cout<<"ma sinh vien : "; getline(cin>>ws,masv); break;
         case 2:
             timKiemSV(); //tìm kiếm và hiển thị danh sách tìm kiếm (có mã sinh viên).
-            cout<<"ma sinh vien :"; cin>>masv; break;
+            cout<<"ma sinh vien : "; getline(cin>>ws,masv); break;
         case 0:
             break;
         default:
@@ -260,7 +309,98 @@ void danhsachsinhvien::suaSV() {
             break;
         }
         //hàm sửa theo mã sinh viên 
-        
+        if (masv!=" ") {
+            cout << setw(11) << "Ma SV" << setw(25) << "Ho va ten" << setw(16) << "Ngay sinh" 
+            << setw(8) << "Gtinh" << setw(8) << "Lop" << setw(16) << "SDT" << setw(13) << "Ma khoa" << setw(20) 
+            << "Que quan" << setw(6) << "Toan" << setw(6) << "Ly" << setw(6) << "Tin" << setw(8) << "Triet" 
+            << setw(6) << "AV" << setw(6) << "DTB" << setw(12) << "Hoc bong" << endl;
+            tktheomaSV(masv).Xuat(); 
+            SinhVien &sv1= tktheomaSV(masv); 
+            cout<<"Ban muon thay doi hang muc nao? \n"; 
+            cout<<"1.Ho va ten \n";
+            cout<<"2.Ngay sinh \n";
+            cout<<"3.Gioi tinh \n";
+            cout<<"4.Lop \n";
+            cout<<"5.So dien thoai \n";
+            cout<<"6.Ma khoa \n";
+            cout<<"7.Que quan \n";
+            cout<<"8.Diem\n"; 
+            cout<<"0.Khong thay doi nua.\n"; 
+            do {cin>>chon; if (chon>=0&&chon<=8) break;
+            else cout<<"khoong hop le. Nhap lai: "; } while (1); 
+            string data; 
+            switch (chon)
+            {
+            case 1:
+                cout<<"Ban muon thay doi thanh: "; getline(cin>>ws,data); 
+                sv1.hoTen=data;
+                break;
+            case 2:
+                cout<<"Ban muon thay doi thanh: "; getline(cin>>ws,data); 
+                sv1.ngaySinh=data; 
+                break;
+            case 3:
+                bool gtinh; 
+                cout<<"Ban muon thay doi thanh: (1.Nam 0.Nu) "; cin>>gtinh; 
+                sv1.gioiTinh=gtinh; 
+                break;
+            case 4:
+                cout<<"Ban muon thay doi thanh: "; getline(cin>>ws,data); 
+                sv1.lop=data;
+                break;
+            case 5:
+                cout<<"Ban muon thay doi thanh: "; getline(cin>>ws,data); 
+                sv1.sdt=data;
+                break;
+            case 6:
+                cout<<"Ban muon thay doi thanh: "; getline(cin>>ws,data); 
+                sv1.maKhoa=data; 
+                break;
+            case 7:
+                cout<<"Ban muon thay doi thanh: "; getline(cin>>ws,data); 
+                sv1.queQuan=data; 
+                break;
+            case 8:
+                float diemm; 
+                char c;
+                cout<<"Ban muon thay doi diem mon nao? (T: toan, L: ly, I: tin, R: triet, A: anh van) ";
+                cin>>c; 
+                c=toupper(c); 
+                cout<<"ban muon thay doi thanh: "; cin>>diemm; 
+                switch (c)
+                {
+                case 'T':
+                    sv1.diem.toan=diemm; 
+                    break;
+                case 'L':
+                    sv1.diem.ly=diemm; 
+                    break;
+                case 'I':
+                    sv1.diem.tin=diemm; 
+                    break; 
+                case 'R':
+                    sv1.diem.triet=diemm; 
+                    break;
+                case 'A':
+                    sv1.diem.anhVan=diemm; 
+                    break;
+                default:
+                    cout<<"du lieu nhap khong hop le."; 
+                    break;
+                }
+                // tính lại điểm trung bình và học bổng sau khi thay đổi điểm.
+                sv1.diem.tinhDTBvaHB(); 
+                break;
+            default:
+                break;
+            }
+            cout<<"ket qua thay doi: \n"; 
+            cout << setw(11) << "Ma SV" << setw(25) << "Ho va ten" << setw(16) << "Ngay sinh" 
+            << setw(8) << "Gtinh" << setw(8) << "Lop" << setw(16) << "SDT" << setw(13) << "Ma khoa" << setw(20) 
+            << "Que quan" << setw(6) << "Toan" << setw(6) << "Ly" << setw(6) << "Tin" << setw(8) << "Triet" 
+            << setw(6) << "AV" << setw(6) << "DTB" << setw(12) << "Hoc bong" << endl;
+            sv1.Xuat();
+        }
         char choice;
         cout<<"ban co muon sua tiep ko? (Y,N) "; cin>>choice; 
         if (choice=='N'||choice=='n') break; 
@@ -270,16 +410,16 @@ void danhsachsinhvien::xoaSV() {
     do {
         int chon; 
         string masv="NO"; 
-        cout<<"Chon sinh vien ban muon sua theo ma so sinh vien: "<<endl;
+        cout<<"Chon sinh vien ban muon xoa theo ma so sinh vien: "<<endl;
         cout<<"1. Nhap       2. Tim kiem.       0. khong sua nua.\n"; 
         cout<<"lua chon cua ban? ";  
         do {cin>>chon; if (chon>=0&&chon<=2) break;} while (1);   
         switch (chon)
         {
-        case 1:cout<<"ma sinh vien :"; cin>>masv; break;
+        case 1:cout<<"ma sinh vien : "; getline(cin>>ws,masv); break;
         case 2:
             timKiemSV(); //tìm kiếm và hiển thị danh sách tìm kiếm (có mã sinh viên).
-            cout<<"ma sinh vien :"; cin>>masv; break;
+            cout<<"ma sinh vien : "; getline(cin>>ws,masv); break;
         case 0:
             break;
         default:
@@ -288,12 +428,29 @@ void danhsachsinhvien::xoaSV() {
         }
         if (masv!="NO") {
             //hàm xoá theo mã sinh viên 
-            
+            char c; 
+            cout<<"Ban co chac muon xoa sinh vien ra khoi danh sach? (Y/N) "; cin>>c; 
+            toupper(c); 
+            if(c=='Y') {                
+                xoaSVtheomaSV(masv); 
+            }
         }
         char choice;
         cout<<"ban co muon xoa tiep ko? (Y,N) "; cin>>choice; 
         if (choice=='N'||choice=='n') break; 
     } while (1); 
+}
+void danhsachsinhvien::xoaSVtheomaSV(string masv) {
+    for (int i=0; i<soLuongSV; i++) {
+        if(list[i].maSV==masv) {
+            for (int j=i; j<soLuongSV-1;j++) {
+                list[j]=list[j+1]; 
+            }
+            soLuongSV--; 
+            break; 
+        }
+    }
+    cout<<"Da xoa."<<endl; 
 }
 void danhsachsinhvien::thongKeSV() {
 
