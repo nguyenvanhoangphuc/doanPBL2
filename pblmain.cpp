@@ -15,16 +15,17 @@ int main() {
     danhsachsinhvien DS;
     DS.Nhaptufile(); 
     DS.Xuat(); 
+    danhsachsinhvien temptk(DS);
     do { 
         menu(); 
         int choice;
         char x;
         cout << "Enter Your Choose: ";    
         do {cin >> choice; if (choice>=0&&choice<=7) break;
-        else cout<<"Khong hop le. Nhap lai: "; } while (1); 
+        else cout<<"Khong hop le. Nhap lai: "; } while (1);      
         switch (choice)
         {
-        case 0:exit(0);
+        case 0:return(0);
         case 1:
             do {
                 DS.themSV(); 
@@ -37,7 +38,7 @@ int main() {
         case 4:DS.sapXepSV(); break; 
         case 5:DS.suaSV(); break; 
         case 6:DS.xoaSV(); break; 
-        case 7:DS.thongKeSV(); break; 
+        case 7:temptk.thongKeSV(); break; 
         default:
             cout << "\n\t\t\tLua chon khong ton tai...";
             system("pause");

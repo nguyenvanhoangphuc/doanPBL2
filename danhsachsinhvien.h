@@ -7,6 +7,8 @@ private:
     SinhVien *list;
 public:
     danhsachsinhvien();
+    // danhsachsinhvien(int);   
+    danhsachsinhvien(const danhsachsinhvien &);
     ~danhsachsinhvien(); 
     void Nhaptufile(); 
     void Xuat(); 
@@ -27,4 +29,5 @@ public:
     void xoaSV(); 
     void xoaSVtheomaSV(string);
     void thongKeSV(); 
+    int demgioiTinh(bool);
 }; 

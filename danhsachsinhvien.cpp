@@ -4,14 +4,28 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
+using namespace std; 
 
 //danh sach ban dau so luong sv la 0 va co vung nho la 1000 sinh vien
 danhsachsinhvien::danhsachsinhvien() {   
     this->soLuongSV=0; 
     this->list=new SinhVien[100]; 
 }
+// danhsachsinhvien::danhsachsinhvien(int a) {
+//     this->soLuongSV=a; 
+//     this->list=new SinhVien[a];
+// }
+danhsachsinhvien::danhsachsinhvien(const danhsachsinhvien &x) {
+    this->soLuongSV=x.soLuongSV; 
+    this->list=new SinhVien[100];
+    for (int i=0; i<soLuongSV; i++) {
+        this->list[i]=x.list[i]; 
+    }
+}
 danhsachsinhvien::~danhsachsinhvien() {
-    delete list; 
+    cout<<"goi ham huy.\n"; 
+    delete [] list; 
 }
 void danhsachsinhvien::Nhaptufile() {
     string line,tempString;
@@ -450,5 +464,103 @@ void danhsachsinhvien::xoaSVtheomaSV(string masv) {
     cout<<"Da xoa."<<endl; 
 }
 void danhsachsinhvien::thongKeSV() {
+    do { 
+        cout<<"da vao.\n"; 
+        int chon; 
+        char choice; 
+        cout<<"----------menu thong ke-----------"<<endl; 
+        cout<<"1. Theo gioi tinh.\n"; 
+        cout<<"2. Theo khoa, nam vao truong.\n";
+        cout<<"3. Theo lop hoc phan.\n";
+        cout<<"4. Theo khoa quan li.\n";
+        cout<<"5. Theo tinh, thanh pho.\n";
+        cout<<"6. Theo xep loai sinh vien.\n";
+        cout<<"7. Theo hoc bong.\n";
+        cout<<"0. Khong thong ke nua.\n"; 
+        cout<<"Lua chon cua ban la? "; 
+        do {cin>>chon; if (chon>=0&&chon<=7) break;
+        else cout<<"khong hop le. Nhap lai: "; } while(1);   
+        switch (chon)
+        {
+        case 1:
+            int choose; 
+            cout<<"Thong ke theo gioi tinh: \n";
+            cout<<"1. Cua toan truong.\n"; 
+            cout<<"2. Cua moi khoa.\n"; 
+            cout<<"3. Cua moi lop.\n"; 
+            cout<<"0. Dung thong ke.\n"; 
+            cout<<"Lua chon cua ban la? "; 
+            do {cin>>choose; if (choose>=0&&choose<=3) break;
+            else cout<<"khong hop le. Nhap lai: "; } while(1);
+            switch (choose)
+            {
+            case 1:
+                //thong ke so nam nu toan truong
+                cout<<"Thong ke theo gioi tinh toan truong.\n"; 
+                cout <<"So sinh vien nam : "; cout << demgioiTinh(1)<<'\n';  
+                cout <<"So sinh vien nu : "; cout << demgioiTinh(0)<<'\n'; 
+                break;
+            case 2:
+                //thong ke so nam nu moi khoa
+                
+                break;
+            case 3:{
+                static danhsachsinhvien tmp;
+                //thong ke so nam nu moi lop
+                sxtheolop();
+                for (int i=0; i<soLuongSV; i++) {
+                    int dem=1; 
+                    while (list[i].lop==list[i+1].lop&&i<soLuongSV-1)
+                    {
 
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"- So sinh vien lop "<<list[i].lop<<" la: "<<dem<<endl; 
+                    cout<<"thay doi so luong tmp.\n"; 
+                    tmp.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmp.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmp.Xuat(); 
+                    cout <<"\t+ So sinh vien nam : "; cout << tmp.demgioiTinh(1)<<'\n';  
+                    cout <<"\t+ So sinh vien nu : "; cout << tmp.demgioiTinh(0)<<'\n'; 
+                }
+                break; }
+            default:
+                break;
+            }
+            break;
+        case 2:
+            sxtheohoTen(); 
+            cout<<"Danh sach da sap xep theo ho ten sinh vien. \n"; 
+            Xuat();
+            break;
+        case 3:
+            sxtheolop(); 
+            cout<<"Danh sach da sap xep theo lop. \n"; 
+            Xuat();
+            break;
+        case 4:
+            sxtheodtb(); 
+            cout<<"Danh sach da sap xep theo diem trung binh. \n"; 
+            Xuat();
+            break;
+        case 0:
+            break;
+        default:
+            cout<<"Lua chon khong hop le."; 
+            break;
+        }
+        cout<<"ban co muon thong ke tiep ko? (Y,N) "; cin>>choice; 
+        if (choice=='N'||choice=='n') break; 
+    } while (1); 
+}
+int danhsachsinhvien::demgioiTinh(bool b) {
+    int dem=0;
+    for (int i=0; i<soLuongSV; i++) {
+        if (list[i].gioiTinh==b) dem++;
+    }
+    return dem; 
 }
