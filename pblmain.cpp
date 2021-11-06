@@ -2,9 +2,11 @@
 #include "sinhvien.h"
 #include "diemso.h"
 #include "cackhoa.h"
+#include "khoa.h"
 #include "sinhvien.cpp"
 #include "danhsachsinhvien.cpp"
 #include "cackhoa.cpp"
+#include "khoa.cpp"
 #include "diemso.cpp"
 #include <iostream>
 #include <iomanip>
@@ -14,7 +16,10 @@ int main() {
     cout<<left; 
     danhsachsinhvien DS;
     DS.Nhaptufile(); 
+    cackhoa CK; 
+    CK.enterFromFile(); 
     DS.Xuat(); 
+    CK.Xuat(); 
     danhsachsinhvien temptk(DS);
     do { 
         menu(); 

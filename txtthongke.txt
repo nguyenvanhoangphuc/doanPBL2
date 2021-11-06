@@ -1,10 +1,19 @@
-Thống kê số nam nữ: 
+Thống kê về quy mô: 
 + Của toàn trường
-+ Của mỗi khoa
++ Của mỗi khoá năm vào trường
++ Của mỗi khoa quản lí
 + Của mỗi lớp 
-Thống kê số sinh viên theo khoá. (Dựa vào 2 chữ số đầu của lớp). 
-Thống kê số sinh viên đạt học bổng 200 / 100 / không đạt học bổng. 
-Thống kê số sinh viên mỗi khoa. (Dựa vào mã khoa) //ghi trong class cackhoa 
-Thống kê số sinh viên mỗi lop. (Dựa vào mã khoa) 
-Thống kê số sinh viên theo tỉnh thành. 
-Thống kê sinh viên giỏi, khá , trung bình , yếu. 
++ Của mỗi tỉnh thành
+Thống kê về xếp loại sinh viên.(giỏi/khá/tb/yếu)
++ Của toàn trường
++ Của mỗi khoá năm vào trường
++ Của mỗi khoa quản lí
++ Của mỗi lớp
++ Của mỗi tỉnh thành
+Thống kê về học bổng. (200/100/0)
++ Của toàn trường  
++ Của mỗi khoá, năm vào trường
++ Của mỗi khoa quản lí
++ Của mỗi lớp 
++ Của mỗi tỉnh thành
+

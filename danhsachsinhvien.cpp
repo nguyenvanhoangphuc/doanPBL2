@@ -10,7 +10,8 @@ using namespace std;
 //danh sach ban dau so luong sv la 0 va co vung nho la 1000 sinh vien
 danhsachsinhvien::danhsachsinhvien() {   
     this->soLuongSV=0; 
-    this->list=new SinhVien[100]; 
+    const int MAX_SINHVIEN =100; 
+    this->list=new SinhVien[MAX_SINHVIEN]; 
 }
 // danhsachsinhvien::danhsachsinhvien(int a) {
 //     this->soLuongSV=a; 
@@ -469,7 +470,7 @@ void danhsachsinhvien::thongKeSV() {
         int chon; 
         char choice; 
         cout<<"----------menu thong ke-----------"<<endl; 
-        cout<<"1. Theo gioi tinh.\n"; 
+        cout<<"1. Ve quy mo.\n"; 
         cout<<"2. Theo khoa, nam vao truong.\n";
         cout<<"3. Theo lop hoc phan.\n";
         cout<<"4. Theo khoa quan li.\n";
@@ -484,7 +485,7 @@ void danhsachsinhvien::thongKeSV() {
         {
         case 1:
             int choose; 
-            cout<<"Thong ke theo gioi tinh: \n";
+            cout<<"Thong ke ve quy mo: \n";
             cout<<"1. Cua toan truong.\n"; 
             cout<<"2. Cua moi khoa.\n"; 
             cout<<"3. Cua moi lop.\n"; 

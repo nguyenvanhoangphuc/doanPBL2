@@ -6,6 +6,8 @@
         "*.tcc": "cpp",
         "istream": "cpp",
         "type_traits": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "string": "cpp",
+        "ostream": "cpp"
     }
 }

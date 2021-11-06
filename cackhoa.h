@@ -1,10 +1,21 @@
 #pragma once
 #include <iostream>
-using namespace std; 
+#include "khoa.h"
+using namespace std;
+
 class cackhoa{
 private:
-    string maKhoa, tenKhoa, nguoiQuanLi; 
-    int soCanBo, soSinhVien, namThanhLap; 
+    int soLuongKhoa; 
+    khoa *listKhoa; 
 public: 
-
+    //mặc định 
+    cackhoa(); 
+    //ham huy
+    ~cackhoa(); 
+    //nhập tất cả từ file thongke.txt riêng số sinh viên phải được tính từ file sinhvien.txt
+    void enterFromFile(); 
+    //xuất danh sach cac khoa hiện đang có trong trường
+    void Xuat(); 
+    //tim kiem khoa dua tren mã khoa được truyền vào.
+    khoa &tkKhoa(string); 
 };
