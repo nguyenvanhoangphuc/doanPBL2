@@ -46,3 +46,12 @@ void cackhoa::Xuat() {
     }
     system("pause");
 }
+int cackhoa::getsoLuongKHoa() {
+    return soLuongKhoa;
+} 
+string cackhoa::getmaKhoa(int k) {
+    return listKhoa[k].maKhoa; 
+}
+string cackhoa::gettenKhoa(int k) {
+    return listKhoa[k].tenKhoa; 
+}

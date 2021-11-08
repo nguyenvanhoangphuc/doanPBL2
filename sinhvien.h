@@ -14,5 +14,6 @@ public:
     ~SinhVien() {} 
     void Xuat(); 
     void Nhap(); 
+    string xepLoai(); 
     friend class danhsachsinhvien; 
 };

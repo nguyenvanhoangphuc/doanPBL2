@@ -16,6 +16,9 @@ public:
     void enterFromFile(); 
     //xuất danh sach cac khoa hiện đang có trong trường
     void Xuat(); 
+    int getsoLuongKHoa(); 
+    string getmaKhoa(int ); 
+    string gettenKhoa(int ); 
     //tim kiem khoa dua tren mã khoa được truyền vào.
     khoa &tkKhoa(string); 
 };

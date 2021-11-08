@@ -64,3 +64,9 @@ void SinhVien::Nhap() {
     fileOut.close();
     fileOut1.close();
 }
+string SinhVien::xepLoai() {
+    if (diem.dtb>=8.5) return "gioi";
+    if (diem.dtb>=7) return "kha";
+    if (diem.dtb>=5) return "tbinh";
+    return "yeu"; 
+}

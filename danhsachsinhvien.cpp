@@ -176,41 +176,53 @@ danhsachsinhvien &danhsachsinhvien::tktheolop(string lopp) {
     }
     return temp2; 
 }
-danhsachsinhvien &danhsachsinhvien::tktheohocBong(bool kt) {
+danhsachsinhvien &danhsachsinhvien::tktheomaKhoa(string makhoa) {
     static danhsachsinhvien temp3;
     temp3.soLuongSV=0; 
     int i;  
     for (i=0;i<soLuongSV;i++) {
-        if (list[i].diem.tinhDTBvaHB()==kt) {
+        if (list[i].maKhoa==makhoa) {
             temp3.list[temp3.soLuongSV]=list[i]; //ham gan mat dinh
             temp3.soLuongSV++; 
         }
     }
     return temp3; 
 }
-danhsachsinhvien &danhsachsinhvien::tktheogioiTinh(bool b) {
+danhsachsinhvien &danhsachsinhvien::tktheohocBong(bool kt) {
     static danhsachsinhvien temp4;
     temp4.soLuongSV=0; 
     int i;  
     for (i=0;i<soLuongSV;i++) {
-        if (list[i].gioiTinh==b) {
+        if (list[i].diem.tinhDTBvaHB()==kt) {
             temp4.list[temp4.soLuongSV]=list[i]; //ham gan mat dinh
             temp4.soLuongSV++; 
         }
     }
     return temp4; 
 }
-danhsachsinhvien &danhsachsinhvien::tktheodtb(float dtbb) {
+danhsachsinhvien &danhsachsinhvien::tktheogioiTinh(bool b) {
     static danhsachsinhvien temp5;
     temp5.soLuongSV=0; 
     int i;  
     for (i=0;i<soLuongSV;i++) {
-        if (list[i].diem.dtb>=dtbb) {
+        if (list[i].gioiTinh==b) {
             temp5.list[temp5.soLuongSV]=list[i]; //ham gan mat dinh
             temp5.soLuongSV++; 
         }
     }
     return temp5; 
+}
+danhsachsinhvien &danhsachsinhvien::tktheodtb(float dtbb) {
+    static danhsachsinhvien temp6;
+    temp6.soLuongSV=0; 
+    int i;  
+    for (i=0;i<soLuongSV;i++) {
+        if (list[i].diem.dtb>=dtbb) {
+            temp6.list[temp6.soLuongSV]=list[i]; //ham gan mat dinh
+            temp6.soLuongSV++; 
+        }
+    }
+    return temp6; 
 }
 void danhsachsinhvien::sapXepSV() {
     do {
@@ -282,6 +294,17 @@ void danhsachsinhvien::sxtheolop() {
     for (int i=1; i<soLuongSV; i++) {
         for (int j=i-1; j>=0; j--) {
             if(list[j].lop>list[j+1].lop) {
+                SinhVien temp=list[j]; 
+                list[j]=list[j+1];
+                list[j+1]=temp;  
+            }
+        }
+    }
+}
+void danhsachsinhvien::sxtheoqueQuan() {
+    for (int i=1; i<soLuongSV; i++) {
+        for (int j=i-1; j>=0; j--) {
+            if(list[j].queQuan>list[j+1].queQuan) {
                 SinhVien temp=list[j]; 
                 list[j]=list[j+1];
                 list[j+1]=temp;  
@@ -464,22 +487,18 @@ void danhsachsinhvien::xoaSVtheomaSV(string masv) {
     }
     cout<<"Da xoa."<<endl; 
 }
-void danhsachsinhvien::thongKeSV() {
+void danhsachsinhvien::thongKeSV(cackhoa &CK) {
     do { 
         cout<<"da vao.\n"; 
         int chon; 
         char choice; 
         cout<<"----------menu thong ke-----------"<<endl; 
         cout<<"1. Ve quy mo.\n"; 
-        cout<<"2. Theo khoa, nam vao truong.\n";
-        cout<<"3. Theo lop hoc phan.\n";
-        cout<<"4. Theo khoa quan li.\n";
-        cout<<"5. Theo tinh, thanh pho.\n";
-        cout<<"6. Theo xep loai sinh vien.\n";
-        cout<<"7. Theo hoc bong.\n";
+        cout<<"2. Ve xep loai sinh vien.\n";
+        cout<<"3. Ve hoc bong.\n";
         cout<<"0. Khong thong ke nua.\n"; 
         cout<<"Lua chon cua ban la? "; 
-        do {cin>>chon; if (chon>=0&&chon<=7) break;
+        do {cin>>chon; if (chon>=0&&chon<=3) break;
         else cout<<"khong hop le. Nhap lai: "; } while(1);   
         switch (chon)
         {
@@ -488,24 +507,57 @@ void danhsachsinhvien::thongKeSV() {
             cout<<"Thong ke ve quy mo: \n";
             cout<<"1. Cua toan truong.\n"; 
             cout<<"2. Cua moi khoa.\n"; 
-            cout<<"3. Cua moi lop.\n"; 
+            cout<<"3. Cua moi khoa, nam vao truong.\n";
+            cout<<"4. Cua moi lop.\n"; 
+            cout<<"5. Cua moi tinh, thanh pho.\n"; 
             cout<<"0. Dung thong ke.\n"; 
             cout<<"Lua chon cua ban la? "; 
-            do {cin>>choose; if (choose>=0&&choose<=3) break;
+            do {cin>>choose; if (choose>=0&&choose<=5) break;
             else cout<<"khong hop le. Nhap lai: "; } while(1);
             switch (choose)
             {
             case 1:
                 //thong ke so nam nu toan truong
-                cout<<"Thong ke theo gioi tinh toan truong.\n"; 
+                cout<<"Thong ke quy mo toan truong.\n"; 
+                cout<<"Tong so sinh vien : "; cout << soLuongSV <<'\n'; 
                 cout <<"So sinh vien nam : "; cout << demgioiTinh(1)<<'\n';  
                 cout <<"So sinh vien nu : "; cout << demgioiTinh(0)<<'\n'; 
                 break;
             case 2:
+                CK.Xuat(); 
+                cout<<CK.getsoLuongKHoa(); 
                 //thong ke so nam nu moi khoa
-                
+                for (int i=0; i<CK.getsoLuongKHoa(); i++) {
+                    cout<<"+ Khoa: "<<CK.gettenKhoa(i)<<'\n'; 
+                    tktheomaKhoa(CK.getmaKhoa(i)).Xuat(); 
+                    cout<<"Tong so sinh vien : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).soLuongSV<<'\n'; 
+                    cout <<"So sinh vien nam : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demgioiTinh(1)<<'\n';  
+                    cout <<"So sinh vien nu : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demgioiTinh(0)<<'\n';
+                }
                 break;
-            case 3:{
+            case 3:
+                static danhsachsinhvien tmpkhoa;
+                sxtheolop();
+                //thong ke so nam nu moi khoá năm vào trường.
+                for (int i=0; i<soLuongSV; i++) {
+                    cout<<"+ Khoa, nam vao truong : "<<list[i].lop.substr(0,2)<<'\n'; 
+                    int dem=1; 
+                    while (list[i].lop.compare(0,2,list[i+1].lop,0,2)==0 && i<soLuongSV-1) {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"Tong so sinh vien : "; cout << dem <<'\n';
+                    tmpkhoa.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmpkhoa.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmpkhoa.Xuat(); 
+                    cout <<"\t+ So sinh vien nam : "; cout << tmpkhoa.demgioiTinh(1)<<'\n';  
+                    cout <<"\t+ So sinh vien nu : "; cout << tmpkhoa.demgioiTinh(0)<<'\n'; 
+                }
+                break;
+            case 4:{
                 static danhsachsinhvien tmp;
                 //thong ke so nam nu moi lop
                 sxtheolop();
@@ -513,12 +565,10 @@ void danhsachsinhvien::thongKeSV() {
                     int dem=1; 
                     while (list[i].lop==list[i+1].lop&&i<soLuongSV-1)
                     {
-
                         dem++; 
                         i++; 
                     }
                     cout<<"- So sinh vien lop "<<list[i].lop<<" la: "<<dem<<endl; 
-                    cout<<"thay doi so luong tmp.\n"; 
                     tmp.soLuongSV=dem; 
                     for (int j=i;dem>0; j-- ) {
                         tmp.list[dem-1]=list[j]; 
@@ -529,24 +579,257 @@ void danhsachsinhvien::thongKeSV() {
                     cout <<"\t+ So sinh vien nu : "; cout << tmp.demgioiTinh(0)<<'\n'; 
                 }
                 break; }
+            case 5:{
+                static danhsachsinhvien tmptinh;
+                //thong ke so nam nu moi lop
+                sxtheoqueQuan();
+                for (int i=0; i<soLuongSV; i++) {
+                    int dem=1; 
+                    while (list[i].queQuan==list[i+1].queQuan&&i<soLuongSV-1)
+                    {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"- So sinh vien tinh, thanh pho "<<list[i].queQuan<<" la: "<<dem<<endl; 
+                    tmptinh.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmptinh.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmptinh.Xuat(); 
+                    cout <<"\t+ So sinh vien nam : "; cout << tmptinh.demgioiTinh(1)<<'\n';  
+                    cout <<"\t+ So sinh vien nu : "; cout << tmptinh.demgioiTinh(0)<<'\n'; 
+                }
+                break; }
+            case 0: break; 
             default:
+                cout<<"Lua chon khong hop le.";
                 break;
             }
             break;
         case 2:
-            sxtheohoTen(); 
-            cout<<"Danh sach da sap xep theo ho ten sinh vien. \n"; 
-            Xuat();
+            cout<<"Thong ke ve xep loai sinh vien: \n";
+            cout<<"1. Cua toan truong.\n"; 
+            cout<<"2. Cua moi khoa.\n"; 
+            cout<<"3. Cua moi khoa, nam vao truong.\n";
+            cout<<"4. Cua moi lop.\n"; 
+            cout<<"5. Cua moi tinh, thanh pho.\n"; 
+            cout<<"0. Dung thong ke.\n"; 
+            cout<<"Lua chon cua ban la? "; 
+            do {cin>>choose; if (choose>=0&&choose<=5) break;
+            else cout<<"khong hop le. Nhap lai: "; } while(1);
+            switch (choose)
+            {
+            case 1:
+                //thong ke so nam nu toan truong
+                cout<<"Thong ke quy mo toan truong.\n"; 
+                cout<<"Tong so sinh vien : "; cout << soLuongSV <<'\n'; 
+                cout <<"So sinh vien gioi : "; cout << demxepLoai("gioi")<<'\n';  
+                cout <<"So sinh vien kha : "; cout << demxepLoai("kha")<<'\n'; 
+                cout <<"So sinh vien trung binh : "; cout <<demxepLoai("tbinh")<<'\n';  
+                cout <<"So sinh vien yeu : "; cout << demxepLoai("yeu")<<'\n';
+                break;
+            case 2:
+                CK.Xuat(); 
+                cout<<CK.getsoLuongKHoa(); 
+                //thong ke so nam nu moi khoa
+                for (int i=0; i<CK.getsoLuongKHoa(); i++) {
+                    cout<<"+ Khoa: "<<CK.gettenKhoa(i)<<'\n'; 
+                    tktheomaKhoa(CK.getmaKhoa(i)).Xuat(); 
+                    cout<<"Tong so sinh vien : "; cout << soLuongSV <<'\n'; 
+                    cout <<"So sinh vien gioi : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demxepLoai("gioi")<<'\n';  
+                    cout <<"So sinh vien kha : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demxepLoai("kha")<<'\n'; 
+                    cout <<"So sinh vien trung binh : "; cout <<tktheomaKhoa(CK.getmaKhoa(i)).demxepLoai("tbinh")<<'\n';  
+                    cout <<"So sinh vien yeu : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demxepLoai("yeu")<<'\n';
+                }
+                break;
+            case 3:
+                static danhsachsinhvien tmpkhoa;
+                sxtheolop();
+                //thong ke so nam nu moi khoá năm vào trường.
+                for (int i=0; i<soLuongSV; i++) {
+                    cout<<"+ Khoa, nam vao truong : "<<list[i].lop.substr(0,2)<<'\n'; 
+                    int dem=1; 
+                    while (list[i].lop.compare(0,2,list[i+1].lop,0,2)==0 && i<soLuongSV-1) {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"Tong so sinh vien : "; cout << dem <<'\n';
+                    tmpkhoa.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmpkhoa.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmpkhoa.Xuat(); 
+                    cout <<"So sinh vien gioi : "; cout << tmpkhoa.demxepLoai("gioi")<<'\n';  
+                    cout <<"So sinh vien kha : "; cout << tmpkhoa.demxepLoai("kha")<<'\n'; 
+                    cout <<"So sinh vien trung binh : "; cout <<tmpkhoa.demxepLoai("tbinh")<<'\n';  
+                    cout <<"So sinh vien yeu : "; cout << tmpkhoa.demxepLoai("yeu")<<'\n';
+                }
+                break;
+            case 4:{
+                static danhsachsinhvien tmp;
+                //thong ke so nam nu moi lop
+                sxtheolop();
+                for (int i=0; i<soLuongSV; i++) {
+                    int dem=1; 
+                    while (list[i].lop==list[i+1].lop&&i<soLuongSV-1)
+                    {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"- So sinh vien lop "<<list[i].lop<<" la: "<<dem<<endl; 
+                    tmp.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmp.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmp.Xuat(); 
+                    cout <<"So sinh vien gioi : "; cout << tmp.demxepLoai("gioi")<<'\n';  
+                    cout <<"So sinh vien kha : "; cout << tmp.demxepLoai("kha")<<'\n'; 
+                    cout <<"So sinh vien trung binh : "; cout <<tmp.demxepLoai("tbinh")<<'\n';  
+                    cout <<"So sinh vien yeu : "; cout << tmp.demxepLoai("yeu")<<'\n';
+                }
+                break; }
+            case 5:{
+                static danhsachsinhvien tmptinh;
+                //thong ke so nam nu moi lop
+                sxtheoqueQuan();
+                for (int i=0; i<soLuongSV; i++) {
+                    int dem=1; 
+                    while (list[i].queQuan==list[i+1].queQuan&&i<soLuongSV-1)
+                    {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"- So sinh vien tinh, thanh pho "<<list[i].queQuan<<" la: "<<dem<<endl; 
+                    tmptinh.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmptinh.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmptinh.Xuat();  
+                    cout <<"So sinh vien gioi : "; cout << tmptinh.demxepLoai("gioi")<<'\n';  
+                    cout <<"So sinh vien kha : "; cout << tmptinh.demxepLoai("kha")<<'\n'; 
+                    cout <<"So sinh vien trung binh : "; cout <<tmptinh.demxepLoai("tbinh")<<'\n';  
+                    cout <<"So sinh vien yeu : "; cout << tmptinh.demxepLoai("yeu")<<'\n';
+                }
+                break; }
+            case 0: break; 
+            default:
+                cout<<"Lua chon khong hop le.";
+                break;
+            }
             break;
+            //end case 2
         case 3:
-            sxtheolop(); 
-            cout<<"Danh sach da sap xep theo lop. \n"; 
-            Xuat();
-            break;
-        case 4:
-            sxtheodtb(); 
-            cout<<"Danh sach da sap xep theo diem trung binh. \n"; 
-            Xuat();
+            cout<<"Thong ke ve hoc bong: \n";
+            cout<<"1. Cua toan truong.\n"; 
+            cout<<"2. Cua moi khoa.\n"; 
+            cout<<"3. Cua moi khoa, nam vao truong.\n";
+            cout<<"4. Cua moi lop.\n"; 
+            cout<<"5. Cua moi tinh, thanh pho.\n"; 
+            cout<<"0. Dung thong ke.\n"; 
+            cout<<"Lua chon cua ban la? "; 
+            do {cin>>choose; if (choose>=0&&choose<=5) break;
+            else cout<<"khong hop le. Nhap lai: "; } while(1);
+            switch (choose)
+            {
+            case 1:
+                //thong ke so nam nu toan truong
+                cout<<"Thong ke quy mo toan truong.\n"; 
+                cout<<"Tong so sinh vien : "; cout << soLuongSV <<'\n'; 
+                cout <<"So sinh vien dat hoc bong 200% : "; cout << demhocBong(200)<<'\n';  
+                cout <<"So sinh vien dat hoc bong 100% : "; cout << demhocBong(100)<<'\n'; 
+                cout <<"So sinh vien khong dat hoc bong: "; cout << demhocBong(0)<<'\n';
+                break;
+            case 2:
+                CK.Xuat(); 
+                cout<<CK.getsoLuongKHoa(); 
+                //thong ke so nam nu moi khoa
+                for (int i=0; i<CK.getsoLuongKHoa(); i++) {
+                    cout<<"+ Khoa: "<<CK.gettenKhoa(i)<<'\n'; 
+                    tktheomaKhoa(CK.getmaKhoa(i)).Xuat(); 
+                    cout<<"Tong so sinh vien : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).soLuongSV <<'\n'; 
+                    cout <<"So sinh vien dat hoc bong 200% : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demhocBong(200)<<'\n';  
+                    cout <<"So sinh vien dat hoc bong 100% : "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demhocBong(100)<<'\n'; 
+                    cout <<"So sinh vien khong dat hoc bong: "; cout << tktheomaKhoa(CK.getmaKhoa(i)).demhocBong(0)<<'\n';
+                }
+                break;
+            case 3:
+                static danhsachsinhvien tmpkhoa;
+                sxtheolop();
+                //thong ke so nam nu moi khoá năm vào trường.
+                for (int i=0; i<soLuongSV; i++) {
+                    cout<<"+ Khoa, nam vao truong : "<<list[i].lop.substr(0,2)<<'\n'; 
+                    int dem=1; 
+                    while (list[i].lop.compare(0,2,list[i+1].lop,0,2)==0 && i<soLuongSV-1) {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"Tong so sinh vien : "; cout << dem <<'\n';
+                    tmpkhoa.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmpkhoa.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmpkhoa.Xuat(); 
+                    cout <<"So sinh vien dat hoc bong 200% : "; cout << tmpkhoa.demhocBong(200)<<'\n';  
+                    cout <<"So sinh vien dat hoc bong 100% : "; cout << tmpkhoa.demhocBong(100)<<'\n'; 
+                    cout <<"So sinh vien khong dat hoc bong: "; cout << tmpkhoa.demhocBong(0)<<'\n';
+                }
+                break;
+            case 4:{
+                static danhsachsinhvien tmp;
+                //thong ke so nam nu moi lop
+                sxtheolop();
+                for (int i=0; i<soLuongSV; i++) {
+                    int dem=1; 
+                    while (list[i].lop==list[i+1].lop&&i<soLuongSV-1)
+                    {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"- So sinh vien lop "<<list[i].lop<<" la: "<<dem<<endl; 
+                    tmp.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmp.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmp.Xuat(); 
+                    cout <<"So sinh vien dat hoc bong 200% : "; cout << tmp.demhocBong(200)<<'\n';  
+                    cout <<"So sinh vien dat hoc bong 100% : "; cout << tmp.demhocBong(100)<<'\n'; 
+                    cout <<"So sinh vien khong dat hoc bong: "; cout << tmp.demhocBong(0)<<'\n'; 
+                }
+                break; }
+            case 5:{
+                static danhsachsinhvien tmptinh;
+                //thong ke so nam nu moi lop
+                sxtheoqueQuan();
+                for (int i=0; i<soLuongSV; i++) {
+                    int dem=1; 
+                    while (list[i].queQuan==list[i+1].queQuan&&i<soLuongSV-1)
+                    {
+                        dem++; 
+                        i++; 
+                    }
+                    cout<<"- So sinh vien tinh, thanh pho "<<list[i].queQuan<<" la: "<<dem<<endl; 
+                    tmptinh.soLuongSV=dem; 
+                    for (int j=i;dem>0; j-- ) {
+                        tmptinh.list[dem-1]=list[j]; 
+                        dem--; 
+                    }
+                    tmptinh.Xuat(); 
+                    cout <<"So sinh vien dat hoc bong 200% : "; cout << tmptinh.demhocBong(200)<<'\n';  
+                    cout <<"So sinh vien dat hoc bong 100% : "; cout << tmptinh.demhocBong(100)<<'\n'; 
+                    cout <<"So sinh vien khong dat hoc bong: "; cout << tmptinh.demhocBong(0)<<'\n';
+                }
+                break; }
+            case 0: break; 
+            default:
+                cout<<"Lua chon khong hop le.";
+                break;
+            }
             break;
         case 0:
             break;
@@ -562,6 +845,20 @@ int danhsachsinhvien::demgioiTinh(bool b) {
     int dem=0;
     for (int i=0; i<soLuongSV; i++) {
         if (list[i].gioiTinh==b) dem++;
+    }
+    return dem; 
+}
+int danhsachsinhvien::demxepLoai(string b) {
+    int dem=0;
+    for (int i=0; i<soLuongSV; i++) {
+        if (list[i].xepLoai()==b) dem++;
+    }
+    return dem; 
+}
+int danhsachsinhvien::demhocBong(int b) {
+    int dem=0;
+    for (int i=0; i<soLuongSV; i++) {
+        if (list[i].diem.hocBong==b) dem++;
     }
     return dem; 
 }

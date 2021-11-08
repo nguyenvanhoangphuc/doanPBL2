@@ -12,11 +12,11 @@
 #include <iomanip>
 using namespace std; 
 void menu(); 
+danhsachsinhvien DS;
+cackhoa CK;
 int main() {
-    cout<<left; 
-    danhsachsinhvien DS;
-    DS.Nhaptufile(); 
-    cackhoa CK; 
+    cout<<left;
+    DS.Nhaptufile();   
     CK.enterFromFile(); 
     DS.Xuat(); 
     CK.Xuat(); 
@@ -26,7 +26,7 @@ int main() {
         int choice;
         char x;
         cout << "Enter Your Choose: ";    
-        do {cin >> choice; if (choice>=0&&choice<=7) break;
+        do {cin >> choice; if (choice>=0&&choice<=8) break;
         else cout<<"Khong hop le. Nhap lai: "; } while (1);      
         switch (choice)
         {
@@ -43,7 +43,8 @@ int main() {
         case 4:DS.sapXepSV(); break; 
         case 5:DS.suaSV(); break; 
         case 6:DS.xoaSV(); break; 
-        case 7:temptk.thongKeSV(); break; 
+        case 7:temptk.thongKeSV(CK); break; 
+        case 8:CK.Xuat(); break;
         default:
             cout << "\n\t\t\tLua chon khong ton tai...";
             system("pause");
@@ -62,6 +63,7 @@ void menu() {
     cout << "\t\t\t 5. Sua danh sach sinh vien" << endl;
     cout << "\t\t\t 6. Xoa sinh vien" << endl;
     cout << "\t\t\t 7. Thong ke sinh vien" << endl;
+    cout << "\t\t\t 8. Hien thi sinh vien" << endl;
     cout << "\t\t\t 0. Thoat chuong trinh" << endl;
     cout << "\t\t\t---------------------------" << endl;
     cout << "\t\t\tChon chuc nang:" << endl;
