@@ -11,6 +11,8 @@ public:
     // danhsachsinhvien(int);   
     danhsachsinhvien(const danhsachsinhvien &);
     ~danhsachsinhvien(); 
+    void tinhDTBvaHB();
+    int getsoLuongSV(); 
     void Nhaptufile(); 
     void Xuat(); 
     void themSV(); 

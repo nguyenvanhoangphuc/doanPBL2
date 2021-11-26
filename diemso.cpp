@@ -16,7 +16,7 @@ diemso::diemso(float toan,float ly,float tin,float triet,float anhVan,float dtb,
     this->hocBong=hocBong; 
 }
 void diemso::Xuat() {
-    tinhDTBvaHB(); 
+    // tinhDTBvaHB(); 
     cout<<setw(6)<<toan<<setw(6)<<ly<<setw(6)<<tin<<setw(8)<<triet<<setw(6)<<anhVan
     <<setw(6)<<dtb<<setw(12)<<hocBong<<endl; 
 }
@@ -30,4 +30,14 @@ bool diemso::tinhDTBvaHB() {
     else
         hocBong = 0;
     return i; 
+}
+diemso &diemso::operator=(const diemso &x) {
+    this->toan=x.toan; 
+    this->ly=x.ly; 
+    this->tin=x.tin; 
+    this->triet=x.triet; 
+    this->anhVan=x.anhVan; 
+    this->dtb=x.dtb; 
+    this->hocBong=x.hocBong;
+    return *this; 
 }

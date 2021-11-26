@@ -8,6 +8,7 @@ public:
     bool tinhDTBvaHB(); 
     void Nhaptufile(); 
     void Xuat();  
+    diemso &operator=(const diemso &); 
     friend class SinhVien;
     friend class danhsachsinhvien; 
 }; 

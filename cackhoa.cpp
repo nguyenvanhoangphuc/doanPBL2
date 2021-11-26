@@ -36,6 +36,13 @@ void cackhoa::enterFromFile() {
         soLuongKhoa++;
     }
     fileIn.close(); 
+    
+}
+void cackhoa::tinhSoSV(danhsachsinhvien &DS) {  
+    // thong ke so nam nu moi khoa
+    for (int i=0; i<getsoLuongKHoa(); i++) {
+        listKhoa[i].soSinhVien=DS.tktheomaKhoa(getmaKhoa(i)).getsoLuongSV(); 
+    }
 }
 void cackhoa::Xuat() {
     cout<<setw(10)<<"ma khoa"<<setw(30)<<"ten khoa quan li"<<setw(20)<<"Ten nguoi quan li"
@@ -54,4 +61,7 @@ string cackhoa::getmaKhoa(int k) {
 }
 string cackhoa::gettenKhoa(int k) {
     return listKhoa[k].tenKhoa; 
+}
+int cackhoa::getsoSinhVien(int k) {
+    return listKhoa[k].soSinhVien; 
 }

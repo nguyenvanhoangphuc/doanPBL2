@@ -17,9 +17,11 @@ cackhoa CK;
 int main() {
     cout<<left;
     DS.Nhaptufile();   
+    DS.tinhDTBvaHB(); 
     CK.enterFromFile(); 
-    DS.Xuat(); 
-    CK.Xuat(); 
+    CK.tinhSoSV(DS);
+    // DS.Xuat(); 
+    // CK.Xuat(); 
     danhsachsinhvien temptk(DS);
     do { 
         menu(); 
@@ -63,7 +65,7 @@ void menu() {
     cout << "\t\t\t 5. Sua danh sach sinh vien" << endl;
     cout << "\t\t\t 6. Xoa sinh vien" << endl;
     cout << "\t\t\t 7. Thong ke sinh vien" << endl;
-    cout << "\t\t\t 8. Hien thi sinh vien" << endl;
+    cout << "\t\t\t 8. Hien thi cac khoa sinh vien" << endl;
     cout << "\t\t\t 0. Thoat chuong trinh" << endl;
     cout << "\t\t\t---------------------------" << endl;
     cout << "\t\t\tChon chuc nang:" << endl;

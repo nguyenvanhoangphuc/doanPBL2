@@ -15,6 +15,9 @@ SinhVien::SinhVien(string maSV, string hoTen, string ngaySinh, bool gioiTinh, st
     this->maKhoa=maKhoa; 
     this->queQuan=queQuan; 
 }
+void SinhVien::tinhDTBvaHB() {
+    diem.tinhDTBvaHB(); 
+}
 
 void SinhVien::Xuat()
 {
@@ -69,4 +72,16 @@ string SinhVien::xepLoai() {
     if (diem.dtb>=7) return "kha";
     if (diem.dtb>=5) return "tbinh";
     return "yeu"; 
+}
+SinhVien &SinhVien::operator=(const SinhVien &x) {
+    this->maSV=x.maSV;
+    this->hoTen=x.hoTen;
+    this->ngaySinh=x.ngaySinh; 
+    this->gioiTinh=x.gioiTinh; 
+    this->lop=x.lop;      
+    this->sdt=x.sdt; 
+    this->maKhoa=x.maKhoa; 
+    this->queQuan=x.queQuan;
+    this->diem=x.diem; 
+    return *this;
 }

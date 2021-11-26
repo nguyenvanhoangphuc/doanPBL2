@@ -12,8 +12,10 @@ public:
     SinhVien(string = "No", string  = "No", string  = "No", bool =0, string  = "No",
                      string  = "No", string  = "No", string  = "No"); 
     ~SinhVien() {} 
+    void tinhDTBvaHB();
     void Xuat(); 
     void Nhap(); 
     string xepLoai(); 
+    SinhVien &operator=(const SinhVien &); 
     friend class danhsachsinhvien; 
 };
