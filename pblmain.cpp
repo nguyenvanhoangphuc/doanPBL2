@@ -3,57 +3,79 @@
 #include "diemso.h"
 #include "cackhoa.h"
 #include "khoa.h"
-#include "sinhvien.cpp"
-#include "danhsachsinhvien.cpp"
-#include "cackhoa.cpp"
-#include "khoa.cpp"
-#include "diemso.cpp"
+
 #include <iostream>
 #include <iomanip>
-using namespace std; 
-void menu(); 
+using namespace std;
+void menu();
 danhsachsinhvien DS;
 cackhoa CK;
-int main() {
-    cout<<left;
-    DS.Nhaptufile();   
-    DS.tinhDTBvaHB(); 
-    CK.enterFromFile(); 
+int main()
+{
+    cout << left;
+    DS.Nhaptufile();
+    DS.tinhDTBvaHB();
+    CK.enterFromFile();
     CK.tinhSoSV(DS);
-    // DS.Xuat(); 
-    // CK.Xuat(); 
+    // DS.Xuat();
+    // CK.Xuat();
     danhsachsinhvien temptk(DS);
-    do { 
-        menu(); 
+    do
+    {
+        system("cls");
+        menu();
         int choice;
         char x;
-        cout << "Enter Your Choose: ";    
-        do {cin >> choice; if (choice>=0&&choice<=8) break;
-        else cout<<"Khong hop le. Nhap lai: "; } while (1);      
+        cout << "Enter Your Choose: ";
+        do
+        {
+            cin >> choice;
+            if (choice >= 0 && choice <= 8)
+                break;
+            else
+                cout << "Khong hop le. Nhap lai: ";
+        } while (1);
         switch (choice)
         {
-        case 0:return(0);
+        case 0:
+            return (0);
         case 1:
-            do {
-                DS.themSV(); 
+            do
+            {
+                DS.themSV();
                 cout << "\n\t\t\tThem sinh vien khac (Y,N): ";
                 cin >> x;
             } while (x == 'y' || x == 'Y');
             break;
-        case 2:DS.Xuat(); break;
-        case 3:DS.timKiemSV(); break; 
-        case 4:DS.sapXepSV(); break; 
-        case 5:DS.suaSV(); break; 
-        case 6:DS.xoaSV(); break; 
-        case 7:temptk.thongKeSV(CK); break; 
-        case 8:CK.Xuat(); break;
+        case 2:
+            DS.Xuat();
+            break;
+        case 3:
+            DS.timKiemSV();
+            break;
+        case 4:
+            DS.sapXepSV();
+            break;
+        case 5:
+            DS.suaSV();
+            break;
+        case 6:
+            DS.xoaSV();
+            break;
+        case 7:
+            DS.thongKeSV(CK);
+            break;
+        case 8:
+            CK.Xuat();
+            break;
         default:
             cout << "\n\t\t\tLua chon khong ton tai...";
             system("pause");
         }
-    } while(1); 
+    } while (1);
 }
-void menu() {
+void menu()
+{
     // system("cls");
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t| HE THONG QUAN LY SINH VIEN |" << endl;
@@ -70,5 +92,4 @@ void menu() {
     cout << "\t\t\t---------------------------" << endl;
     cout << "\t\t\tChon chuc nang:" << endl;
     cout << "\t\t\t---------------------------" << endl;
-}   
-    
+}
