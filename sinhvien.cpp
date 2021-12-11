@@ -3,7 +3,83 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <string.h>
 using namespace std;
+
+bool check_float(string str)
+{
+    int count = 0;
+    if (str[0] == '.')
+        return false;
+    if (str[str.length() - 1] == '.')
+        return false;
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (str[i] == '.')
+            count++;
+        if (count > 1)
+            return false;
+    }
+
+    for (int i = 0; i < str.length(); i++)
+        if ((isdigit(str[i]) == false) && (str[i] != '.'))
+            return false;
+    return true;
+}
+
+bool check_number(string str)
+{
+    for (int i = 0; i < str.length(); i++)
+        if (isdigit(str[i]) == false)
+            return false;
+    return true;
+}
+
+bool check_char(string str)
+{
+    for (int i = 0; i < str.length(); i++)
+        if (isdigit(str[i]) == true)
+            return false;
+    return true;
+}
+
+bool check_makhoa(string str)
+{
+    if ((str.compare("CND")) == 0)
+        return true;
+    if ((str.compare("CNT")) == 0)
+        return true;
+    if ((str.compare("CKH")) == 0)
+        return true;
+    if ((str.compare("DIE")) == 0)
+        return true;
+    if ((str.compare("DTV")) == 0)
+        return true;
+    if ((str.compare("HOA")) == 0)
+        return true;
+    if ((str.compare("KTR")) == 0)
+        return true;
+    if ((str.compare("QLD")) == 0)
+        return true;
+    if ((str.compare("XDC")) == 0)
+        return true;
+    return false;
+}
+
+bool check_lop(string str)
+{
+    if (str.length() < 4)
+        return false;
+    if (!isdigit(str[0]))
+        return false;
+    if (!isdigit(str[1]))
+        return false;
+    if (isdigit(str[2]))
+        return false;
+    return true;
+}
+
 SinhVien::SinhVien(string maSV, string hoTen, string ngaySinh, bool gioiTinh, string lop,
                    string sdt, string maKhoa, string queQuan)
 {
@@ -30,41 +106,100 @@ void SinhVien::Xuat()
 
 void SinhVien::Nhap()
 {
-    cout << "\t\t\tNhap ma sinh vien: ";
-    getline(cin >> ws, maSV);
-    cout << "\t\t\tNhap ho ten sinh vien: ";
-    getline(cin >> ws, hoTen);
-    cout << "\t\t\tNhap nam sinh: ";
-    getline(cin >> ws, ngaySinh);
-    cout << "\t\t\tNhap gioi tinh (Nam:1 ; Nu:0) : ";
-    cin >> gioiTinh;
-    cout << "\t\t\tNhap lop: ";
-    getline(cin >> ws, lop);
-    cout << "\t\t\tNhap so dien thoai: ";
-    getline(cin >> ws, sdt);
-    cout << "\t\t\tNhap ma khoa: ";
-    getline(cin >> ws, maKhoa);
-    cout << "\t\t\tNhap que quan: ";
-    getline(cin >> ws, queQuan);
 
-    cout << "\t\t\tNhap diem toan: ";
-    cin >> diem.toan;
-    cout << "\t\t\tNhap diem ly: ";
-    cin >> diem.ly;
-    cout << "\t\t\tNhap diem tin: ";
-    cin >> diem.tin;
-    cout << "\t\t\tNhap diem triet: ";
-    cin >> diem.triet;
-    cout << "\t\t\tNhap diem anh van: ";
-    cin >> diem.anhVan;
+    string str_temp;
+
+    do
+    {
+        cout << endl
+             << "\t\t\tNhap ma sinh vien (9 chu so): ";
+        getline(cin >> ws, maSV);
+    } while (!check_number(maSV) || (maSV.length() != 9));
+
+    do
+    {
+        cout << "\t\t\tNhap ho ten sinh vien: ";
+        getline(cin >> ws, hoTen);
+    } while (!check_char(hoTen));
+
+    cout << "\t\t\tNhap ngay sinh: ";
+    getline(cin >> ws, ngaySinh);
+
+    do
+    {
+        cout << "\t\t\tNhap gioi tinh (Nam:1 ; Nu:0) : ";
+        getline(cin >> ws, str_temp);
+    } while (!check_number(str_temp) || (stoi(str_temp) != 1 && stoi(str_temp) != 0));
+    gioiTinh = stoi(str_temp);
+
+    do
+    {
+        cout << "\t\t\tNhap lop (vi du: 20T1, 20DCLC3): ";
+        getline(cin >> ws, lop);
+    } while (!check_lop(lop));
+
+    do
+    {
+        cout << "\t\t\tNhap so dien thoai: ";
+        getline(cin >> ws, sdt);
+    } while (!check_number(sdt));
+
+    do
+    {
+        cout << "\t\t\tNhap ma khoa (CND, CNT, CKH, DIE, DTV, HOA, KTR, QLD, XDC): ";
+        getline(cin >> ws, maKhoa);
+    } while (!check_makhoa(maKhoa));
+
+    do
+    {
+        cout << "\t\t\tNhap que quan: ";
+        getline(cin >> ws, queQuan);
+    } while (!check_char(queQuan));
+
+    do
+    {
+        cout << "\t\t\tNhap diem toan (max 10): ";
+        getline(cin >> ws, str_temp);
+    } while (!check_float(str_temp) || (stod(str_temp) > 10));
+    diem.toan = stod(str_temp);
+
+    do
+    {
+        cout << "\t\t\tNhap diem ly (max 10): ";
+        getline(cin >> ws, str_temp);
+    } while (!check_float(str_temp) || (stod(str_temp) > 10));
+    diem.ly = stod(str_temp);
+
+    do
+    {
+        cout << "\t\t\tNhap diem tin (max 10): ";
+        getline(cin >> ws, str_temp);
+    } while (!check_float(str_temp) || (stod(str_temp) > 10));
+    diem.tin = stod(str_temp);
+
+    do
+    {
+        cout << "\t\t\tNhap diem triet (max 10): ";
+        getline(cin >> ws, str_temp);
+    } while (!check_float(str_temp) || (stod(str_temp) > 10));
+    diem.triet = stod(str_temp);
+
+    do
+    {
+        cout << "\t\t\tNhap diem anh van (max 10): ";
+        getline(cin >> ws, str_temp);
+    } while (!check_float(str_temp) || (stod(str_temp) > 10));
+    diem.anhVan = stod(str_temp);
 
     fstream fileOut, fileOut1;
     fileOut.open("txtsinhvien.txt", ios::app | ios::out);
     fileOut1.open("txtdiemso.txt", ios::app | ios::out);
-    fileOut << maSV << "," << hoTen << "," << ngaySinh << "," << gioiTinh << "," << lop << ","
-            << sdt << "," << maKhoa << "," << queQuan << endl;
-    fileOut1 << maSV << "," << diem.toan << "," << diem.ly << "," << diem.tin << ","
-             << diem.triet << "," << diem.anhVan << endl;
+    fileOut
+        << maSV << "," << hoTen << "," << ngaySinh << "," << gioiTinh << "," << lop << ","
+        << sdt << "," << maKhoa << "," << queQuan << endl;
+    fileOut1
+        << maSV << "," << diem.toan << "," << diem.ly << "," << diem.tin << ","
+        << diem.triet << "," << diem.anhVan << endl;
     fileOut.close();
     fileOut1.close();
 }

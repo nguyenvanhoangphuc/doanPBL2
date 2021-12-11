@@ -7,6 +7,80 @@
 #include <iostream>
 using namespace std;
 
+bool check_float1(string str)
+{
+    int count = 0;
+    if (str[0] == '.')
+        return false;
+    if (str[str.length() - 1] == '.')
+        return false;
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (str[i] == '.')
+            count++;
+        if (count > 1)
+            return false;
+    }
+
+    for (int i = 0; i < str.length(); i++)
+        if ((isdigit(str[i]) == false) && (str[i] != '.'))
+            return false;
+    return true;
+}
+
+bool check_number1(string str)
+{
+    for (int i = 0; i < str.length(); i++)
+        if (isdigit(str[i]) == false)
+            return false;
+    return true;
+}
+
+bool check_char1(string str)
+{
+    for (int i = 0; i < str.length(); i++)
+        if (isdigit(str[i]) == true)
+            return false;
+    return true;
+}
+
+bool check_makhoa1(string str)
+{
+    if ((str.compare("CND")) == 0)
+        return true;
+    if ((str.compare("CNT")) == 0)
+        return true;
+    if ((str.compare("CKH")) == 0)
+        return true;
+    if ((str.compare("DIE")) == 0)
+        return true;
+    if ((str.compare("DTV")) == 0)
+        return true;
+    if ((str.compare("HOA")) == 0)
+        return true;
+    if ((str.compare("KTR")) == 0)
+        return true;
+    if ((str.compare("QLD")) == 0)
+        return true;
+    if ((str.compare("XDC")) == 0)
+        return true;
+    return false;
+}
+
+bool check_lop1(string str)
+{
+    if (str.length() < 4)
+        return false;
+    if (!isdigit(str[0]))
+        return false;
+    if (!isdigit(str[1]))
+        return false;
+    if (isdigit(str[2]))
+        return false;
+    return true;
+}
+
 string get_last_word(const string &s)
 {
     auto index = s.find_last_of(' ');
@@ -123,24 +197,28 @@ void danhsachsinhvien::timKiemSV()
         cout << "3. Danh sach sinh vien theo lop.\n";
         cout << "4. Danh sach sinh vien co hoc bong.\n";
         cout << "5. Theo gioi tinh.\n";
-        cout << "6. Theo muc diem trung binh.\n";
+        cout << "6. Diem trung binh lon hon.\n";
+        cout << "7. Diem trung binh nho hon.\n";
         cout << "0. Khong tim kiem nua.\n";
         cout << endl
-             << "Lua chon cua ban la? " << endl;
+             << "Lua chon cua ban la : ";
         do
         {
             cin >> chon;
-            if (chon >= 0 && chon <= 6)
+            if (chon >= 0 && chon <= 7)
                 break;
         } while (1);
         string masv, hoten, lopp;
         bool b;
+        string str_temp;
+        string c;
         switch (chon)
         {
         case 1:
             cout << "Nhap ma sinh vien: ";
             cin >> masv;
-            cout << setw(11) << "Ma SV" << setw(25) << "Ho va ten" << setw(16) << "Nam sinh"
+            cout << endl
+                 << setw(11) << "Ma SV" << setw(25) << "Ho va ten" << setw(16) << "Nam sinh"
                  << setw(8) << "Gtinh" << setw(8) << "Lop" << setw(16) << "SDT" << setw(13) << "Ma khoa" << setw(20)
                  << "Que quan" << setw(6) << "Toan" << setw(6) << "Ly" << setw(6) << "Tin" << setw(8) << "Triet"
                  << setw(6) << "AV" << setw(6) << "DTB" << setw(12) << "Hoc bong" << endl;
@@ -151,32 +229,56 @@ void danhsachsinhvien::timKiemSV()
         case 2:
             cout << "Nhap ho ten sinh vien: ";
             getline(cin >> ws, hoten);
+            cout << endl;
             tktheohoTen(hoten).Xuat();
             break;
         case 3:
             cout << "Nhap lop cua sinh vien: ";
             getline(cin >> ws, lopp);
+            cout << endl;
             tktheolop(lopp).Xuat();
             break;
         case 4:
-            char c;
+
             cout << "Danh sach co hoc bong hay khong? (Y/N) ";
-            cin >> c;
-            if (c == 'y' || c == 'Y')
+            getline(cin >> ws, c);
+            cout << endl;
+            if (c.compare("y") == 0 || c.compare("Y") == 0)
                 tktheohocBong(1).Xuat();
-            else
+            else if (c.compare("N") == 0 || c.compare("n") == 0)
                 tktheohocBong(0).Xuat();
             break;
         case 5:
-            cout << "Nhap gioi tinh cua sinh vien: (1.Nam | 0.Nu) ";
-            cin >> b;
+
+            do
+            {
+                cout << "Nhap gioi tinh (Nam:1 ; Nu:0) : ";
+                getline(cin >> ws, str_temp);
+            } while (!check_number1(str_temp) || (stoi(str_temp) != 1 && stoi(str_temp) != 0));
+            b = stoi(str_temp);
             tktheogioiTinh(b).Xuat();
             break;
         case 6:
-            float dtbb;
-            cout << "Nhap muc diem trung binh? ";
-            cin >> dtbb;
-            tktheodtb(dtbb).Xuat();
+            float dtbb1;
+            do
+            {
+                cout << "Nhap muc diem trung binh: ";
+                getline(cin >> ws, str_temp);
+            } while (!check_float1(str_temp));
+
+            dtbb1 = stod(str_temp);
+            tklonhondtb(dtbb1).Xuat();
+            break;
+        case 7:
+            float dtbb2;
+            do
+            {
+                cout << "Nhap muc diem trung binh: ";
+                getline(cin >> ws, str_temp);
+            } while (!check_float1(str_temp));
+
+            dtbb2 = stod(str_temp);
+            tknhohondtb(dtbb2).Xuat();
             break;
         case 0:
             break;
@@ -276,7 +378,7 @@ danhsachsinhvien &danhsachsinhvien::tktheogioiTinh(bool b)
     }
     return temp5;
 }
-danhsachsinhvien &danhsachsinhvien::tktheodtb(float dtbb)
+danhsachsinhvien &danhsachsinhvien::tklonhondtb(float dtbb)
 {
     static danhsachsinhvien temp6;
     temp6.soLuongSV = 0;
@@ -291,13 +393,29 @@ danhsachsinhvien &danhsachsinhvien::tktheodtb(float dtbb)
     }
     return temp6;
 }
+
+danhsachsinhvien &danhsachsinhvien::tknhohondtb(float dtbb)
+{
+    static danhsachsinhvien temp6;
+    temp6.soLuongSV = 0;
+    int i;
+    for (i = 0; i < soLuongSV; i++)
+    {
+        if (list[i].diem.dtb <= dtbb)
+        {
+            temp6.list[temp6.soLuongSV] = list[i]; //ham gan mat dinh
+            temp6.soLuongSV++;
+        }
+    }
+    return temp6;
+}
 void danhsachsinhvien::sapXepSV()
 {
     do
     {
         int chon;
         char choice;
-        cout << "----------menu sap xep-----------" << endl;
+        cout << "----------Menu sap xep-----------" << endl;
         cout << "1. Theo ma so sinh vien.\n";
         cout << "2. Theo ho ten sinh vien (alphabet).\n";
         cout << "3. Theo lop.\n";
@@ -338,7 +456,8 @@ void danhsachsinhvien::sapXepSV()
             cout << "Lua chon khong hop le.";
             break;
         }
-        cout << "Ban co muon sap xep tiep ko? (Y,N) ";
+        cout << endl
+             << "Ban co muon sap xep tiep ko? (Y,N) ";
         cin >> choice;
         if (choice == 'N' || choice == 'n')
             break;
@@ -473,86 +592,127 @@ void danhsachsinhvien::suaSV()
                 SinhVien &sv1 = list[tt];
                 cout << endl
                      << "Ban muon thay doi hang muc nao? \n";
-                cout << "1.Ho va ten \n";
-                cout << "2.Ngay sinh \n";
-                cout << "3.Gioi tinh \n";
-                cout << "4.Lop \n";
-                cout << "5.So dien thoai \n";
-                cout << "6.Ma khoa \n";
-                cout << "7.Que quan \n";
-                cout << "8.Diem\n";
+                cout << "1.Ma sinh vien \n";
+                cout << "2.Ho va ten \n";
+                cout << "3.Ngay sinh \n";
+                cout << "4.Gioi tinh \n";
+                cout << "5.Lop \n";
+                cout << "6.So dien thoai \n";
+                cout << "7.Ma khoa \n";
+                cout << "8.Que quan \n";
+                cout << "9.Diem\n";
                 cout << "0.Khong thay doi nua.\n";
+                cout << "Lua chon so: ";
                 do
                 {
                     cin >> chon;
-                    if (chon >= 0 && chon <= 8)
+                    if (chon >= 0 && chon <= 9)
                         break;
                     else
                         cout << "Khong hop le. Nhap lai: ";
                 } while (1);
                 string data;
+                string diemm;
                 switch (chon)
                 {
                 case 1:
-                    cout << "Ban muon thay doi thanh: ";
-                    getline(cin >> ws, data);
-                    sv1.hoTen = data;
+                    do
+                    {
+                        cout << endl
+                             << "Nhap ma sinh vien (9 chu so): ";
+                        getline(cin >> ws, data);
+                    } while (!check_number1(data) || (data.length() != 9));
+                    sv1.maSV = data;
                     break;
                 case 2:
-                    cout << "Ban muon thay doi thanh: ";
+                    do
+                    {
+                        cout << "Nhap ho ten sinh vien: ";
+                        getline(cin >> ws, data);
+                    } while (!check_char1(data));
+                    sv1.hoTen = data;
+                    break;
+
+                case 3:
+                    cout << "Nhap ngay sinh: ";
                     getline(cin >> ws, data);
                     sv1.ngaySinh = data;
                     break;
-                case 3:
-                    bool gtinh;
-                    cout << "Ban muon thay doi thanh: (1.Nam 0.Nu) ";
-                    cin >> gtinh;
-                    sv1.gioiTinh = gtinh;
-                    break;
+
                 case 4:
-                    cout << "Ban muon thay doi thanh: ";
-                    getline(cin >> ws, data);
+                    do
+                    {
+                        cout << "Nhap gioi tinh (Nam:1 ; Nu:0) : ";
+                        getline(cin >> ws, data);
+                    } while (!check_number1(data) || (stoi(data) != 1 && stoi(data) != 0));
+                    sv1.gioiTinh = stoi(data);
+                    break;
+
+                case 5:
+                    do
+                    {
+                        cout << "Nhap lop (vi du: 20T1, 20DCLC3): ";
+                        getline(cin >> ws, data);
+                    } while (!check_lop1(data));
                     sv1.lop = data;
                     break;
-                case 5:
-                    cout << "Ban muon thay doi thanh: ";
-                    getline(cin >> ws, data);
+
+                case 6:
+                    do
+                    {
+                        cout << "Nhap so dien thoai: ";
+                        getline(cin >> ws, data);
+                    } while (!check_number1(data));
                     sv1.sdt = data;
                     break;
-                case 6:
-                    cout << "Ban muon thay doi thanh: ";
-                    getline(cin >> ws, data);
+
+                case 7:
+                    do
+                    {
+                        cout << "Nhap ma khoa (CND, CNT, CKH, DIE, DTV, HOA, KTR, QLD, XDC): ";
+                        getline(cin >> ws, data);
+                    } while (!check_makhoa1(data));
                     sv1.maKhoa = data;
                     break;
-                case 7:
-                    cout << "Ban muon thay doi thanh: ";
-                    getline(cin >> ws, data);
+
+                case 8:
+                    do
+                    {
+                        cout << "Nhap que quan: ";
+                        getline(cin >> ws, data);
+                    } while (!check_char1(data));
+
                     sv1.queQuan = data;
                     break;
-                case 8:
-                    float diemm;
+
+                case 9:
+
                     char c;
                     cout << "Ban muon thay doi diem mon nao? (T: toan, L: ly, I: tin, R: triet, A: anh van) ";
                     cin >> c;
                     c = toupper(c);
-                    cout << "Ban muon thay doi thanh: ";
-                    cin >> diemm;
+
+                    do
+                    {
+                        cout << "Ban muon thay doi thanh: ";
+                        getline(cin >> ws, diemm);
+                    } while (!check_float1(diemm) || (stod(diemm) > 10));
                     switch (c)
                     {
                     case 'T':
-                        sv1.diem.toan = diemm;
+                        sv1.diem.toan = stod(diemm);
                         break;
                     case 'L':
-                        sv1.diem.ly = diemm;
+                        sv1.diem.ly = stod(diemm);
                         break;
                     case 'I':
-                        sv1.diem.tin = diemm;
+                        sv1.diem.tin = stod(diemm);
                         break;
                     case 'R':
-                        sv1.diem.triet = diemm;
+                        sv1.diem.triet = stod(diemm);
                         break;
                     case 'A':
-                        sv1.diem.anhVan = diemm;
+                        sv1.diem.anhVan = stod(diemm);
                         break;
                     default:
                         cout << "Du lieu nhap khong hop le.";
@@ -716,7 +876,7 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
             if (chon >= 0 && chon <= 3)
                 break;
             else
-                cout << "khong hop le. Nhap lai: ";
+                cout << "Khong hop le. Nhap lai: ";
         } while (1);
         switch (chon)
         {
@@ -737,7 +897,7 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 if (choose >= 0 && choose <= 5)
                     break;
                 else
-                    cout << "khong hop le. Nhap lai: ";
+                    cout << "Khong hop le. Nhap lai: ";
             } while (1);
             switch (choose)
             {
@@ -844,7 +1004,8 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
             }
             break;
         case 2:
-            cout << "Thong ke ve xep loai sinh vien: \n";
+            cout << endl
+                 << "Thong ke ve xep loai sinh vien: \n";
             cout << "1. Cua toan truong.\n";
             cout << "2. Cua moi khoa.\n";
             cout << "3. Cua moi khoa, nam vao truong.\n";
@@ -980,7 +1141,8 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
             break;
             //end case 2
         case 3:
-            cout << "Thong ke ve hoc bong: \n";
+            cout << endl
+                 << "Thong ke ve hoc bong: \n";
             cout << "1. Cua toan truong.\n";
             cout << "2. Cua moi khoa.\n";
             cout << "3. Cua moi khoa, nam vao truong.\n";
@@ -994,7 +1156,7 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 if (choose >= 0 && choose <= 5)
                     break;
                 else
-                    cout << "khong hop le. Nhap lai: ";
+                    cout << "Khong hop le. Nhap lai: ";
             } while (1);
             switch (choose)
             {
@@ -1067,7 +1229,7 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 sxtheolop();
                 cout << endl
                      << setw(20) << "Lop" << setw(15) << "Tong so sv" << setw(15) << "200%" << setw(15)
-                     << "100%" << setw(15) << "khong" << endl;
+                     << "100%" << setw(15) << "Khong" << endl;
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;

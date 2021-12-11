@@ -26,7 +26,8 @@ public:
     danhsachsinhvien &tktheomaKhoa(string);
     danhsachsinhvien &tktheohocBong(bool);
     danhsachsinhvien &tktheogioiTinh(bool);
-    danhsachsinhvien &tktheodtb(float);
+    danhsachsinhvien &tklonhondtb(float);
+    danhsachsinhvien &tknhohondtb(float);
     void sapXepSV();
     void sxtheomaSV();
     void sxtheohoTen();

@@ -17,16 +17,14 @@ int main()
     DS.tinhDTBvaHB();
     CK.enterFromFile();
     CK.tinhSoSV(DS);
-    // DS.Xuat();
-    // CK.Xuat();
-    danhsachsinhvien temptk(DS);
+
     do
     {
         system("cls");
         menu();
         int choice;
         char x;
-        cout << "Enter Your Choose: ";
+        cout << "Nhap lua chon cua ban: ";
         do
         {
             cin >> choice;
