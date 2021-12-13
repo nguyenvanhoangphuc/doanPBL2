@@ -584,8 +584,9 @@ void danhsachsinhvien::suaSV()
             else
             {
                 cout << setw(11) << "Ma SV" << setw(25) << "Ho va ten" << setw(16) << "Ngay sinh"
-                     << setw(8) << "Gtinh" << setw(8) << "Lop" << setw(16) << "SDT" << setw(13) << "Ma khoa" << setw(20)
-                     << "Que quan" << setw(6) << "Toan" << setw(6) << "Ly" << setw(6) << "Tin" << setw(8) << "Triet"
+                     << setw(8) << "Gtinh" << setw(8) << "Lop" << setw(16) << "SDT" 
+                     << setw(13) << "Ma khoa" << setw(20)<< "Que quan" << setw(6) << "Toan" 
+                     << setw(6) << "Ly" << setw(6) << "Tin" << setw(8) << "Triet"
                      << setw(6) << "AV" << setw(6) << "DTB" << setw(12) << "Hoc bong" << endl;
 
                 list[tt].Xuat();
@@ -603,17 +604,24 @@ void danhsachsinhvien::suaSV()
                 cout << "9.Diem\n";
                 cout << "0.Khong thay doi nua.\n";
                 cout << "Lua chon so: ";
-                do
-                {
-                    cin >> chon;
-                    if (chon >= 0 && chon <= 9)
+                int chon[10];
+                int i=0; 
+                char t; 
+                do {
+                    do {
+                    cin>>chon[i]; 
+                    t=getchar(); 
+                    if (chon[i] >= 0 && chon[i] <= 9)
                         break;
                     else
                         cout << "Khong hop le. Nhap lai: ";
-                } while (1);
+                    } while (1); 
+                    i++; 
+                } while (t!='\n');    
                 string data;
                 string diemm;
-                switch (chon)
+                for (int j=0; j<i; j++) {
+                switch (chon[j])
                 {
                 case 1:
                     do
@@ -686,18 +694,22 @@ void danhsachsinhvien::suaSV()
                     break;
 
                 case 9:
-
-                    char c;
+                    char c[10];
                     cout << "Ban muon thay doi diem mon nao? (T: toan, L: ly, I: tin, R: triet, A: anh van) ";
-                    cin >> c;
-                    c = toupper(c);
-
+                    t=0; int ci=0;
+                    do {
+                        cin>>c[ci]; 
+                        t=getchar(); 
+                        c[ci] = toupper(c[ci]); ci++;
+                    } while (t!='\n'); 
+                    for (int i_c=0; i_c<ci; i_c++) {
                     do
                     {
+                        cout<<"Mon thu "<<i_c<<":"<<endl;
                         cout << "Ban muon thay doi thanh: ";
                         getline(cin >> ws, diemm);
                     } while (!check_float1(diemm) || (stod(diemm) > 10));
-                    switch (c)
+                    switch (c[i])
                     {
                     case 'T':
                         sv1.diem.toan = stod(diemm);
@@ -718,13 +730,14 @@ void danhsachsinhvien::suaSV()
                         cout << "Du lieu nhap khong hop le.";
                         break;
                     }
+                    }
                     // tính lại điểm trung bình và học bổng sau khi thay đổi điểm.
                     sv1.diem.tinhDTBvaHB();
                     break;
                 default:
                     break;
                 }
-
+                }
                 fstream fileOut, fileOut1;
                 fileOut.open("txtsinhvien.txt", ios::out);
                 fileOut1.open("txtdiemso.txt", ios::out);
@@ -754,10 +767,10 @@ void danhsachsinhvien::suaSV()
         char choice;
         cout << endl
              << "Ban co muon sua tiep ko? (Y,N) ";
-        cin >> choice;
+        cin >> choice;  
         if (choice == 'N' || choice == 'n')
             break;
-    } while (1);
+    } while (1);    
 }
 void danhsachsinhvien::xoaSV()
 {
@@ -1337,3 +1350,4 @@ int danhsachsinhvien::demhocBong(int b)
     }
     return dem;
 }
+

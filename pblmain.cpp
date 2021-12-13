@@ -3,6 +3,11 @@
 #include "diemso.h"
 #include "cackhoa.h"
 #include "khoa.h"
+#include "danhsachsinhvien.cpp"
+#include "sinhvien.cpp"
+#include "diemso.cpp"
+#include "cackhoa.cpp"
+#include "khoa.cpp"
 
 #include <iostream>
 #include <iomanip>
@@ -20,18 +25,18 @@ int main()
 
     do
     {
-        system("cls");
+        // system("cls");
         menu();
         int choice;
         char x;
-        cout << "Nhap lua chon cua ban: ";
+        cout << "\t\t\tNhap lua chon cua ban: ";
         do
         {
             cin >> choice;
             if (choice >= 0 && choice <= 8)
                 break;
             else
-                cout << "Khong hop le. Nhap lai: ";
+                cout << "\t\t\tKhong hop le. Nhap lai: ";
         } while (1);
         switch (choice)
         {
@@ -78,16 +83,16 @@ void menu()
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t| HE THONG QUAN LY SINH VIEN |" << endl;
     cout << "\t\t\t-----------------------------" << endl;
-    cout << "\t\t\t 1. Nhap sinh vien" << endl;
-    cout << "\t\t\t 2. Hien thi sinh vien" << endl;
-    cout << "\t\t\t 3. Tim kiem sinh vien" << endl;
-    cout << "\t\t\t 4. Sap xep sinh vien" << endl;
-    cout << "\t\t\t 5. Sua danh sach sinh vien" << endl;
-    cout << "\t\t\t 6. Xoa sinh vien" << endl;
-    cout << "\t\t\t 7. Thong ke sinh vien" << endl;
-    cout << "\t\t\t 8. Hien thi cac khoa sinh vien" << endl;
-    cout << "\t\t\t 0. Thoat chuong trinh" << endl;
+    cout << "\t\t\t 1. NHAP" << endl;
+    cout << "\t\t\t 2. HIEN THI" << endl;
+    cout << "\t\t\t 3. TIM KIEM" << endl;
+    cout << "\t\t\t 4. SAP XEP" << endl;
+    cout << "\t\t\t 5. SUA" << endl;
+    cout << "\t\t\t 6. XOA" << endl;
+    cout << "\t\t\t 7. THONG KE" << endl;
+    cout << "\t\t\t 8. HIEN THI CAC KHOA" << endl;
+    cout << "\t\t\t 0. THOAT CHUONG TRINH" << endl;
     cout << "\t\t\t---------------------------" << endl;
-    cout << "\t\t\tChon chuc nang:" << endl;
-    cout << "\t\t\t---------------------------" << endl;
+    // cout << "\t\t\tChon chuc nang:" << endl;
+    // cout << "\t\t\t---------------------------" << endl;
 }

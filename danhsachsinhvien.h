@@ -8,18 +8,16 @@ class danhsachsinhvien
 private:
     int soLuongSV;
     SinhVien *list;
-
 public:
     danhsachsinhvien();
-    // danhsachsinhvien(int);
     danhsachsinhvien(const danhsachsinhvien &);
     ~danhsachsinhvien();
     void tinhDTBvaHB();
-    int getsoLuongSV();
     void Nhaptufile();
     void Xuat();
     void themSV();
     void timKiemSV();
+    int getsoLuongSV();
     int tktheomaSV(string);
     danhsachsinhvien &tktheohoTen(string);
     danhsachsinhvien &tktheolop(string);
