@@ -6,8 +6,20 @@
 #include <iomanip>
 #include <iostream>
 using namespace std;
-
-bool check_float1(string str)
+bool isdigit(char x) {
+    return (x>=48&&x<=57); 
+}
+long long int Stoi (string str) {
+    long long int tong=0; 
+    const int ASCII_0 = 48; 
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (isdigit(str[i])==false) break; 
+        tong=tong*10+(str[i]-ASCII_0); 
+    }
+    return tong; 
+}
+bool check_float1(string str)  //đã viết thuật toán
 {
     int count = 0;
     if (str[0] == '.')
@@ -29,7 +41,7 @@ bool check_float1(string str)
     return true;
 }
 
-bool check_number1(string str)
+bool check_number1(string str) //đã viết thuật toán
 {
     for (int i = 0; i < str.length(); i++)
         if (isdigit(str[i]) == false)
@@ -37,7 +49,7 @@ bool check_number1(string str)
     return true;
 }
 
-bool check_char1(string str)
+bool check_char1(string str)  //đã viết thuật toán
 {
     for (int i = 0; i < str.length(); i++)
         if (isdigit(str[i]) == true)
@@ -45,30 +57,17 @@ bool check_char1(string str)
     return true;
 }
 
-bool check_makhoa1(string str)
+bool check_makhoa1(string str)   //đã viết thuật toán
 {
-    if ((str.compare("CND")) == 0)
+    char xau[][5]= {"CND","CNT","CKH","DIE","DTV","HOA","KTR","QLD","XDC"};
+    for (int i=0; i<9; i++) {
+        if ((str.compare(xau[i])) == 0)
         return true;
-    if ((str.compare("CNT")) == 0)
-        return true;
-    if ((str.compare("CKH")) == 0)
-        return true;
-    if ((str.compare("DIE")) == 0)
-        return true;
-    if ((str.compare("DTV")) == 0)
-        return true;
-    if ((str.compare("HOA")) == 0)
-        return true;
-    if ((str.compare("KTR")) == 0)
-        return true;
-    if ((str.compare("QLD")) == 0)
-        return true;
-    if ((str.compare("XDC")) == 0)
-        return true;
+    }
     return false;
 }
 
-bool check_lop1(string str)
+bool check_lop1(string str)  //đã viết thuật toán
 {
     if (str.length() < 4)
         return false;
@@ -104,7 +103,7 @@ danhsachsinhvien::danhsachsinhvien(const danhsachsinhvien &x)
     this->list = new SinhVien[100];
     for (int i = 0; i < soLuongSV; i++)
     {
-        this->list[i] = x.list[i];
+        this->list[i] = x.list[i];  
     }
 }
 danhsachsinhvien::~danhsachsinhvien()
@@ -605,7 +604,7 @@ void danhsachsinhvien::suaSV()
                 cout << "0.Khong thay doi nua.\n";
                 cout << "Lua chon so: ";
                 int chon[10];
-                int i=0; 
+                int i=0; int ci;
                 char t; 
                 do {
                     do {
@@ -620,123 +619,125 @@ void danhsachsinhvien::suaSV()
                 } while (t!='\n');    
                 string data;
                 string diemm;
+                char c[10]; 
                 for (int j=0; j<i; j++) {
-                switch (chon[j])
-                {
-                case 1:
-                    do
+                    switch (chon[j])
                     {
-                        cout << endl
-                             << "Nhap ma sinh vien (9 chu so): ";
-                        getline(cin >> ws, data);
-                    } while (!check_number1(data) || (data.length() != 9));
-                    sv1.maSV = data;
-                    break;
-                case 2:
-                    do
-                    {
-                        cout << "Nhap ho ten sinh vien: ";
-                        getline(cin >> ws, data);
-                    } while (!check_char1(data));
-                    sv1.hoTen = data;
-                    break;
-
-                case 3:
-                    cout << "Nhap ngay sinh: ";
-                    getline(cin >> ws, data);
-                    sv1.ngaySinh = data;
-                    break;
-
-                case 4:
-                    do
-                    {
-                        cout << "Nhap gioi tinh (Nam:1 ; Nu:0) : ";
-                        getline(cin >> ws, data);
-                    } while (!check_number1(data) || (stoi(data) != 1 && stoi(data) != 0));
-                    sv1.gioiTinh = stoi(data);
-                    break;
-
-                case 5:
-                    do
-                    {
-                        cout << "Nhap lop (vi du: 20T1, 20DCLC3): ";
-                        getline(cin >> ws, data);
-                    } while (!check_lop1(data));
-                    sv1.lop = data;
-                    break;
-
-                case 6:
-                    do
-                    {
-                        cout << "Nhap so dien thoai: ";
-                        getline(cin >> ws, data);
-                    } while (!check_number1(data));
-                    sv1.sdt = data;
-                    break;
-
-                case 7:
-                    do
-                    {
-                        cout << "Nhap ma khoa (CND, CNT, CKH, DIE, DTV, HOA, KTR, QLD, XDC): ";
-                        getline(cin >> ws, data);
-                    } while (!check_makhoa1(data));
-                    sv1.maKhoa = data;
-                    break;
-
-                case 8:
-                    do
-                    {
-                        cout << "Nhap que quan: ";
-                        getline(cin >> ws, data);
-                    } while (!check_char1(data));
-
-                    sv1.queQuan = data;
-                    break;
-
-                case 9:
-                    char c[10];
-                    cout << "Ban muon thay doi diem mon nao? (T: toan, L: ly, I: tin, R: triet, A: anh van) ";
-                    t=0; int ci=0;
-                    do {
-                        cin>>c[ci]; 
-                        t=getchar(); 
-                        c[ci] = toupper(c[ci]); ci++;
-                    } while (t!='\n'); 
-                    for (int i_c=0; i_c<ci; i_c++) {
-                    do
-                    {
-                        cout<<"Mon thu "<<i_c<<":"<<endl;
-                        cout << "Ban muon thay doi thanh: ";
-                        getline(cin >> ws, diemm);
-                    } while (!check_float1(diemm) || (stod(diemm) > 10));
-                    switch (c[i])
-                    {
-                    case 'T':
-                        sv1.diem.toan = stod(diemm);
+                    case 1:
+                        do
+                        {
+                            cout << endl
+                                << "Nhap ma sinh vien (9 chu so): ";
+                            getline(cin >> ws, data);
+                        } while (!check_number1(data) || (data.length() != 9));
+                        sv1.maSV = data;
                         break;
-                    case 'L':
-                        sv1.diem.ly = stod(diemm);
+                    case 2:
+                        do
+                        {
+                            cout << "Nhap ho ten sinh vien: ";
+                            getline(cin >> ws, data);
+                        } while (!check_char1(data));
+                        sv1.hoTen = data;
                         break;
-                    case 'I':
-                        sv1.diem.tin = stod(diemm);
+
+                    case 3:
+                        cout << "Nhap ngay sinh: ";
+                        getline(cin >> ws, data);
+                        sv1.ngaySinh = data;
                         break;
-                    case 'R':
-                        sv1.diem.triet = stod(diemm);
+
+                    case 4:
+                        do
+                        {
+                            cout << "Nhap gioi tinh (Nam:1 ; Nu:0) : ";
+                            getline(cin >> ws, data);
+                        } while (!check_number1(data) || (stoi(data) != 1 && stoi(data) != 0));
+                        sv1.gioiTinh = stoi(data);
                         break;
-                    case 'A':
-                        sv1.diem.anhVan = stod(diemm);
+
+                    case 5:
+                        do
+                        {
+                            cout << "Nhap lop (vi du: 20T1, 20DCLC3): ";
+                            getline(cin >> ws, data);
+                        } while (!check_lop1(data));
+                        sv1.lop = data;
                         break;
-                    default:
-                        cout << "Du lieu nhap khong hop le.";
+
+                    case 6:
+                        do
+                        {
+                            cout << "Nhap so dien thoai: ";
+                            getline(cin >> ws, data);
+                        } while (!check_number1(data));
+                        sv1.sdt = data;
                         break;
+
+                    case 7:
+                        do
+                        {
+                            cout << "Nhap ma khoa (CND, CNT, CKH, DIE, DTV, HOA, KTR, QLD, XDC): ";
+                            getline(cin >> ws, data);
+                        } while (!check_makhoa1(data));
+                        sv1.maKhoa = data;
+                        break;
+
+                    case 8:
+                        do
+                        {
+                            cout << "Nhap que quan: ";
+                            getline(cin >> ws, data);
+                        } while (!check_char1(data));
+
+                        sv1.queQuan = data;
+                        break;
+
+                    case 9:
+                        cout << "Ban muon thay doi diem mon nao? (T: toan, L: ly, I: tin, R: triet, A: anh van) ";
+                        t=0; ci=0;
+                        do {
+                            cin>>c[ci]; 
+                            t=getchar(); 
+                            c[ci] = toupper(c[ci]); ci++;
+                        } while (t!='\n'); 
+                        for (int i_c=0; i_c<ci; i_c++) {
+                        do
+                        {
+                            cout<<"Mon thu "<<(i_c+1)<<":"<<endl;
+                            cout << "Ban muon thay doi thanh: ";
+                            getline(cin >> ws, diemm);
+                        } while (!check_float1(diemm) || (stod(diemm) > 10));
+
+                        switch (c[i_c])
+                        {
+                        case 'T':
+                            sv1.diem.toan = stod(diemm);
+                            break;
+                        case 'L':
+                            sv1.diem.ly = stod(diemm);
+                            break;
+                        case 'I':
+                            sv1.diem.tin = stod(diemm);
+                            break;
+                        case 'R':
+                            sv1.diem.triet = stod(diemm);
+                            break;
+                        case 'A':
+                            sv1.diem.anhVan = stod(diemm);
+                            break;
+                        default:
+                            cout << "Du lieu nhap khong hop le.";
+                            break;
+                        }
+                        }
+                        // tính lại điểm trung bình và học bổng sau khi thay đổi điểm.
+                        sv1.diem.tinhDTBvaHB();
+                        break;
+                    default: {
+                        cout << "\n\t\t\tLua chon khong ton tai...";
+                        break;}
                     }
-                    }
-                    // tính lại điểm trung bình và học bổng sau khi thay đổi điểm.
-                    sv1.diem.tinhDTBvaHB();
-                    break;
-                default:
-                    break;
-                }
                 }
                 fstream fileOut, fileOut1;
                 fileOut.open("txtsinhvien.txt", ios::out);

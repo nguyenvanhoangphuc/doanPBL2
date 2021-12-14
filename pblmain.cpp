@@ -91,7 +91,7 @@ void menu()
     cout << "\t\t\t 6. XOA" << endl;
     cout << "\t\t\t 7. THONG KE" << endl;
     cout << "\t\t\t 8. HIEN THI CAC KHOA" << endl;
-    cout << "\t\t\t 0. THOAT CHUONG TRINH" << endl;
+    cout << "\t\t\t 0. THOAT HE THONG" << endl;
     cout << "\t\t\t---------------------------" << endl;
     // cout << "\t\t\tChon chuc nang:" << endl;
     // cout << "\t\t\t---------------------------" << endl;
