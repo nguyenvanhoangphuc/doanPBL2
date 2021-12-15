@@ -5,7 +5,7 @@
 using namespace std;
 
 class danhsachsinhvien;
-class cackhoa
+class cackhoa   // (has_khoa)
 {
 private:
     int soLuongKhoa;

@@ -3,7 +3,7 @@
 #include "diemso.h"
 using namespace std;
 
-class SinhVien
+class SinhVien   //(has_diemso)
 {
     string maSV, hoTen, ngaySinh, lop, sdt, maKhoa, queQuan;
     bool  gioiTinh; 

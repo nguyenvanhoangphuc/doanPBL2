@@ -3,7 +3,7 @@
 #include "cackhoa.h"
 
 class cackhoa;
-class danhsachsinhvien
+class danhsachsinhvien // (has_sinhvien)
 {
 private:
     int soLuongSV;

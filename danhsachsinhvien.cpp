@@ -181,6 +181,13 @@ void danhsachsinhvien::themSV()
 {
     list[soLuongSV].Nhap();
     list[soLuongSV].tinhDTBvaHB();
+    cout<<"\nDa them sinh viên vào danh sach."<<endl<<endl; 
+    cout<<"Thong tin sinh vien vua nhap: "<<endl; 
+    cout << setw(11) << "Ma SV" << setw(25) << "Ho va ten" << setw(16) << "Ngay sinh"
+        << setw(8) << "Gtinh" << setw(8) << "Lop" << setw(16) << "SDT" << setw(13) << "Ma khoa" << setw(20)
+        << "Que quan" << setw(6) << "Toan" << setw(6) << "Ly" << setw(6) << "Tin" << setw(8) << "Triet"
+        << setw(6) << "AV" << setw(6) << "DTB" << setw(12) << "Hoc bong" << endl;
+    list[soLuongSV].Xuat(); 
     soLuongSV++;
 }
 void danhsachsinhvien::timKiemSV()
@@ -216,14 +223,13 @@ void danhsachsinhvien::timKiemSV()
         case 1:
             cout << "Nhap ma sinh vien: ";
             cin >> masv;
+            tt = tktheomaSV(masv);
             cout << endl
                  << setw(11) << "Ma SV" << setw(25) << "Ho va ten" << setw(16) << "Nam sinh"
                  << setw(8) << "Gtinh" << setw(8) << "Lop" << setw(16) << "SDT" << setw(13) << "Ma khoa" << setw(20)
                  << "Que quan" << setw(6) << "Toan" << setw(6) << "Ly" << setw(6) << "Tin" << setw(8) << "Triet"
                  << setw(6) << "AV" << setw(6) << "DTB" << setw(12) << "Hoc bong" << endl;
-            tt = tktheomaSV(masv);
-            if (tt != -1)
-                list[tt].Xuat();
+            if (tt!=-1) list[tt].Xuat();
             break;
         case 2:
             cout << "Nhap ho ten sinh vien: ";
@@ -238,7 +244,6 @@ void danhsachsinhvien::timKiemSV()
             tktheolop(lopp).Xuat();
             break;
         case 4:
-
             cout << "Danh sach co hoc bong hay khong? (Y/N) ";
             getline(cin >> ws, c);
             cout << endl;
@@ -248,7 +253,6 @@ void danhsachsinhvien::timKiemSV()
                 tktheohocBong(0).Xuat();
             break;
         case 5:
-
             do
             {
                 cout << "Nhap gioi tinh (Nam:1 ; Nu:0) : ";
