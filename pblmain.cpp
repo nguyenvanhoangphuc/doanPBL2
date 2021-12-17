@@ -25,7 +25,6 @@ int main()
 
     do
     {
-        // system("cls");
         menu();
         int choice;
         char x;
@@ -79,7 +78,6 @@ int main()
 }
 void menu()
 {
-    // system("cls");
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t| HE THONG QUAN LY SINH VIEN |" << endl;
     cout << "\t\t\t-----------------------------" << endl;
@@ -93,6 +91,4 @@ void menu()
     cout << "\t\t\t 8. HIEN THI CAC KHOA" << endl;
     cout << "\t\t\t 0. THOAT HE THONG" << endl;
     cout << "\t\t\t---------------------------" << endl;
-    // cout << "\t\t\tChon chuc nang:" << endl;
-    // cout << "\t\t\t---------------------------" << endl;
 }

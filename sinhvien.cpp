@@ -105,8 +105,7 @@ void SinhVien::Xuat()
 }
 
 void SinhVien::Nhap()
-{
-
+{   
     string str_temp;
 
     do
