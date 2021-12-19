@@ -7,4 +7,3 @@ HOA,Hoa,Nguyen Van Manh,36,1990
 KTR,Kien truc,Phan Dang Huy,39,1994
 QLD,Quan ly du an,Nguyen Van Khai,25,1987
 XDC,Xay dung cau duong,Tran Van Long,27,1985
-

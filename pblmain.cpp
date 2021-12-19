@@ -22,7 +22,6 @@ int main()
     DS.tinhDTBvaHB();
     CK.enterFromFile();
     CK.tinhSoSV(DS);
-
     do
     {
         menu();

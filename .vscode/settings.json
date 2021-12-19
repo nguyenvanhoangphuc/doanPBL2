@@ -1,13 +1,6 @@
 {
     "files.associations": {
-        "fstream": "cpp",
-        "iomanip": "cpp",
-        "iostream": "cpp",
         "*.tcc": "cpp",
-        "istream": "cpp",
-        "type_traits": "cpp",
-        "random": "cpp",
-        "string": "cpp",
-        "ostream": "cpp"
+        "iomanip": "cpp"
     }
 }

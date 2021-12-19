@@ -27,16 +27,20 @@ void cackhoa::enterFromFile()
     {
         getline(fileIn, line);
         stringstream ss(line);
-        getline(ss, listKhoa[soLuongKhoa].maKhoa, ',');
-        if (listKhoa[soLuongKhoa].maKhoa.empty())
+        // getline(ss, listKhoa[soLuongKhoa].getmaKhoa(), ',');
+        getline(ss, tempString, ',');
+        listKhoa[soLuongKhoa].setmaKhoa(tempString); 
+        if (listKhoa[soLuongKhoa].getmaKhoa().empty())
             break;
-        getline(ss, listKhoa[soLuongKhoa].tenKhoa, ',');
-        getline(ss, listKhoa[soLuongKhoa].nguoiQuanLi, ',');
+        getline(ss, tempString, ',');
+        listKhoa[soLuongKhoa].settenKhoa(tempString); 
+        getline(ss, tempString, ',');
+        listKhoa[soLuongKhoa].setnguoiQuanLi(tempString); 
         //gioi tinh
         getline(ss, tempString, ',');
-        listKhoa[soLuongKhoa].soCanBo = stod(tempString);
+        listKhoa[soLuongKhoa].setsoCanBo(stod(tempString)); 
         getline(ss, tempString, ',');
-        listKhoa[soLuongKhoa].namThanhLap = stod(tempString);
+        listKhoa[soLuongKhoa].setnamThanhLap(stod(tempString));
         soLuongKhoa++;
     }
     fileIn.close();
@@ -46,7 +50,7 @@ void cackhoa::tinhSoSV(danhsachsinhvien &DS)
     // thong ke so nam nu moi khoa
     for (int i = 0; i < getsoLuongKHoa(); i++)
     {
-        listKhoa[i].soSinhVien = DS.tktheomaKhoa(getmaKhoa(i)).getsoLuongSV();
+        listKhoa[i].setsoSinhVien(DS.tktheomaKhoa(getmaKhoa(i)).getsoLuongSV()); 
     }
 }
 void cackhoa::Xuat()
@@ -55,8 +59,8 @@ void cackhoa::Xuat()
          << setw(10) << "So CB" << setw(10) << "So SV" << setw(10) << "Nam TL" << endl;
     for (int i = 0; i < soLuongKhoa; i++)
     {
-        cout << setw(10) << listKhoa[i].maKhoa << setw(30) << listKhoa[i].tenKhoa << setw(20) << listKhoa[i].nguoiQuanLi
-             << setw(10) << listKhoa[i].soCanBo << setw(10) << listKhoa[i].soSinhVien << setw(10) << listKhoa[i].namThanhLap << endl;
+        cout << setw(10) << listKhoa[i].getmaKhoa() << setw(30) << listKhoa[i].gettenKhoa() << setw(20) << listKhoa[i].getnguoiQuanLi()
+             << setw(10) << listKhoa[i].getsoCanBo() << setw(10) << listKhoa[i].getsoSinhVien() << setw(10) << listKhoa[i].getnamThanhLap() << endl;
     }
     system("pause");
 }
@@ -66,13 +70,13 @@ int cackhoa::getsoLuongKHoa()
 }
 string cackhoa::getmaKhoa(int k)
 {
-    return listKhoa[k].maKhoa;
+    return listKhoa[k].getmaKhoa();
 }
 string cackhoa::gettenKhoa(int k)
 {
-    return listKhoa[k].tenKhoa;
+    return listKhoa[k].gettenKhoa();
 }
 int cackhoa::getsoSinhVien(int k)
 {
-    return listKhoa[k].soSinhVien;
+    return listKhoa[k].getsoSinhVien();
 }

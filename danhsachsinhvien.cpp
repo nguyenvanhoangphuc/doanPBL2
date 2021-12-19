@@ -93,10 +93,7 @@ danhsachsinhvien::danhsachsinhvien()
     const int MAX_SINHVIEN = 100;
     this->list = new SinhVien[MAX_SINHVIEN];
 }
-// danhsachsinhvien::danhsachsinhvien(int a) {
-//     this->soLuongSV=a;
-//     this->list=new SinhVien[a];
-// }
+
 danhsachsinhvien::danhsachsinhvien(const danhsachsinhvien &x)
 {
     this->soLuongSV = x.soLuongSV;
@@ -131,32 +128,39 @@ void danhsachsinhvien::Nhaptufile()
     {
         getline(fileIn, line);
         stringstream ss(line);
-        getline(ss, list[soLuongSV].maSV, ',');
-        if (list[soLuongSV].maSV.empty())
+        getline(ss, tempString, ',');
+        list[soLuongSV].setmaSV(tempString);
+        if (list[soLuongSV].getmaSV().empty())
             break;
-        getline(ss, list[soLuongSV].hoTen, ',');
-        getline(ss, list[soLuongSV].ngaySinh, ',');
+        getline(ss, tempString, ',');
+        list[soLuongSV].sethoTen(tempString);
+        getline(ss, tempString, ',');
+        list[soLuongSV].setngaySinh(tempString);
         //gioi tinh
         getline(ss, tempString, ',');
-        list[soLuongSV].gioiTinh = stod(tempString);
-        getline(ss, list[soLuongSV].lop, ',');
-        getline(ss, list[soLuongSV].sdt, ',');
-        getline(ss, list[soLuongSV].maKhoa, ',');
-        getline(ss, list[soLuongSV].queQuan, ',');
+        list[soLuongSV].setgioiTinh(stod(tempString));
+        getline(ss, tempString, ',');
+        list[soLuongSV].setlop(tempString);
+        getline(ss, tempString, ',');
+        list[soLuongSV].setsdt(tempString);
+        getline(ss, tempString, ',');
+        list[soLuongSV].setmaKhoa(tempString);
+        getline(ss, tempString, ',');
+        list[soLuongSV].setqueQuan(tempString);
         //file diem so
         getline(fileIn1, line);
         stringstream cc(line);
         getline(cc, tempString, ',');
         getline(cc, tempString, ',');
-        list[soLuongSV].diem.toan = stod(tempString);
+        list[soLuongSV].setdiemtoan(stod(tempString));
         getline(cc, tempString, ',');
-        list[soLuongSV].diem.ly = stod(tempString);
+        list[soLuongSV].setdiemly (stod(tempString));
         getline(cc, tempString, ',');
-        list[soLuongSV].diem.tin = stod(tempString);
+        list[soLuongSV].setdiemtin ( stod(tempString));
         getline(cc, tempString, ',');
-        list[soLuongSV].diem.triet = stod(tempString);
+        list[soLuongSV].setdiemtriet ( stod(tempString));
         getline(cc, tempString, ',');
-        list[soLuongSV].diem.anhVan = stod(tempString);
+        list[soLuongSV].setdiemanhVan (stod(tempString));
         soLuongSV++;
     }
     fileIn.close();
@@ -173,7 +177,6 @@ void danhsachsinhvien::Xuat()
     {
         cout << setw(4) << i + 1;
         list[i].Xuat();
-        // cout<<list[i].diem.dtb<<" ";
     }
     system("pause");
 }
@@ -301,7 +304,7 @@ int danhsachsinhvien::tktheomaSV(string masv)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].maSV == masv)
+        if (list[i].getmaSV() == masv)
             return i;
     }
     return -1;
@@ -313,7 +316,7 @@ danhsachsinhvien &danhsachsinhvien::tktheohoTen(string hoten)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].hoTen == hoten)
+        if (list[i].gethoTen() == hoten)
         {
             temp1.list[temp1.soLuongSV] = list[i]; //ham gan mat dinh
             temp1.soLuongSV++;
@@ -328,9 +331,9 @@ danhsachsinhvien &danhsachsinhvien::tktheolop(string lopp)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].lop == lopp)
+        if (list[i].getlop() == lopp)
         {
-            temp2.list[temp2.soLuongSV] = list[i]; //ham gan mat dinh
+            temp2.list[temp2.soLuongSV] = list[i];
             temp2.soLuongSV++;
         }
     }
@@ -343,9 +346,9 @@ danhsachsinhvien &danhsachsinhvien::tktheomaKhoa(string makhoa)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].maKhoa == makhoa)
+        if (list[i].getmaKhoa() == makhoa)
         {
-            temp3.list[temp3.soLuongSV] = list[i]; //ham gan mat dinh
+            temp3.list[temp3.soLuongSV] = list[i]; 
             temp3.soLuongSV++;
         }
     }
@@ -358,9 +361,9 @@ danhsachsinhvien &danhsachsinhvien::tktheohocBong(bool kt)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].diem.tinhDTBvaHB() == kt)
+        if (list[i].getdiem().tinhDTBvaHB() == kt)
         {
-            temp4.list[temp4.soLuongSV] = list[i]; //ham gan mat dinh
+            temp4.list[temp4.soLuongSV] = list[i]; 
             temp4.soLuongSV++;
         }
     }
@@ -373,9 +376,9 @@ danhsachsinhvien &danhsachsinhvien::tktheogioiTinh(bool b)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].gioiTinh == b)
+        if (list[i].getgioiTinh() == b)
         {
-            temp5.list[temp5.soLuongSV] = list[i]; //ham gan mat dinh
+            temp5.list[temp5.soLuongSV] = list[i]; 
             temp5.soLuongSV++;
         }
     }
@@ -388,9 +391,9 @@ danhsachsinhvien &danhsachsinhvien::tklonhondtb(float dtbb)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].diem.dtb >= dtbb)
+        if (list[i].getdiem().getdtb() >= dtbb)
         {
-            temp6.list[temp6.soLuongSV] = list[i]; //ham gan mat dinh
+            temp6.list[temp6.soLuongSV] = list[i]; 
             temp6.soLuongSV++;
         }
     }
@@ -404,9 +407,9 @@ danhsachsinhvien &danhsachsinhvien::tknhohondtb(float dtbb)
     int i;
     for (i = 0; i < soLuongSV; i++)
     {
-        if (list[i].diem.dtb <= dtbb)
+        if (list[i].getdiem().getdtb() <= dtbb)
         {
-            temp6.list[temp6.soLuongSV] = list[i]; //ham gan mat dinh
+            temp6.list[temp6.soLuongSV] = list[i]; 
             temp6.soLuongSV++;
         }
     }
@@ -472,7 +475,7 @@ void danhsachsinhvien::sxtheomaSV()
     {
         for (int j = i - 1; j >= 0; j--)
         {
-            if (list[j].maSV > list[j + 1].maSV)
+            if (list[j].getmaSV() > list[j + 1].getmaSV())
             {
                 SinhVien temp = list[j];
                 list[j] = list[j + 1];
@@ -487,7 +490,7 @@ void danhsachsinhvien::sxtheohoTen()
     {
         for (int j = i - 1; j >= 0; j--)
         {
-            if (get_last_word(list[j].hoTen) > get_last_word(list[j + 1].hoTen))
+            if (get_last_word(list[j].gethoTen()) > get_last_word(list[j + 1].gethoTen()))
             {
                 SinhVien temp = list[j];
                 list[j] = list[j + 1];
@@ -502,7 +505,7 @@ void danhsachsinhvien::sxtheolop()
     {
         for (int j = i - 1; j >= 0; j--)
         {
-            if (list[j].lop > list[j + 1].lop)
+            if (list[j].getlop() > list[j + 1].getlop())
             {
                 SinhVien temp = list[j];
                 list[j] = list[j + 1];
@@ -517,7 +520,7 @@ void danhsachsinhvien::sxtheoqueQuan()
     {
         for (int j = i - 1; j >= 0; j--)
         {
-            if (list[j].queQuan > list[j + 1].queQuan)
+            if (list[j].getqueQuan() > list[j + 1].getqueQuan())
             {
                 SinhVien temp = list[j];
                 list[j] = list[j + 1];
@@ -532,7 +535,7 @@ void danhsachsinhvien::sxtheodtb()
     {
         for (int j = i - 1; j >= 0; j--)
         {
-            if (list[j].diem.dtb > list[j + 1].diem.dtb)
+            if (list[j].getdiem().getdtb() > list[j + 1].getdiem().getdtb())
             {
                 SinhVien temp = list[j];
                 list[j] = list[j + 1];
@@ -565,7 +568,8 @@ void danhsachsinhvien::suaSV()
             getline(cin >> ws, masv);
             break;
         case 2:
-            timKiemSV(); //tìm kiếm và hiển thị danh sách tìm kiếm (có mã sinh viên).
+            //tìm kiếm và hiển thị danh sách tìm kiếm (có mã sinh viên).
+            timKiemSV();
             cout << "Ma sinh vien : ";
             getline(cin >> ws, masv);
             break;
@@ -634,7 +638,7 @@ void danhsachsinhvien::suaSV()
                                 << "Nhap ma sinh vien (9 chu so): ";
                             getline(cin >> ws, data);
                         } while (!check_number1(data) || (data.length() != 9));
-                        sv1.maSV = data;
+                        sv1.setmaSV (data);
                         break;
                     case 2:
                         do
@@ -642,13 +646,13 @@ void danhsachsinhvien::suaSV()
                             cout << "Nhap ho ten sinh vien: ";
                             getline(cin >> ws, data);
                         } while (!check_char1(data));
-                        sv1.hoTen = data;
+                        sv1.sethoTen (data);
                         break;
 
                     case 3:
                         cout << "Nhap ngay sinh: ";
                         getline(cin >> ws, data);
-                        sv1.ngaySinh = data;
+                        sv1.setngaySinh (data);
                         break;
 
                     case 4:
@@ -657,7 +661,7 @@ void danhsachsinhvien::suaSV()
                             cout << "Nhap gioi tinh (Nam:1 ; Nu:0) : ";
                             getline(cin >> ws, data);
                         } while (!check_number1(data) || (stoi(data) != 1 && stoi(data) != 0));
-                        sv1.gioiTinh = stoi(data);
+                        sv1.setgioiTinh (stoi(data));
                         break;
 
                     case 5:
@@ -666,7 +670,7 @@ void danhsachsinhvien::suaSV()
                             cout << "Nhap lop (vi du: 20T1, 20DCLC3): ";
                             getline(cin >> ws, data);
                         } while (!check_lop1(data));
-                        sv1.lop = data;
+                        sv1.setlop (data);
                         break;
 
                     case 6:
@@ -675,7 +679,7 @@ void danhsachsinhvien::suaSV()
                             cout << "Nhap so dien thoai: ";
                             getline(cin >> ws, data);
                         } while (!check_number1(data));
-                        sv1.sdt = data;
+                        sv1.setsdt (data);
                         break;
 
                     case 7:
@@ -684,7 +688,7 @@ void danhsachsinhvien::suaSV()
                             cout << "Nhap ma khoa (CND, CNT, CKH, DIE, DTV, HOA, KTR, QLD, XDC): ";
                             getline(cin >> ws, data);
                         } while (!check_makhoa1(data));
-                        sv1.maKhoa = data;
+                        sv1.setmaKhoa (data);
                         break;
 
                     case 8:
@@ -694,7 +698,7 @@ void danhsachsinhvien::suaSV()
                             getline(cin >> ws, data);
                         } while (!check_char1(data));
 
-                        sv1.queQuan = data;
+                        sv1.setqueQuan (data);
                         break;
 
                     case 9:
@@ -716,19 +720,19 @@ void danhsachsinhvien::suaSV()
                         switch (c[i_c])
                         {
                         case 'T':
-                            sv1.diem.toan = stod(diemm);
+                            sv1.setdiemtoan (stod(diemm));
                             break;
                         case 'L':
-                            sv1.diem.ly = stod(diemm);
+                            sv1.setdiemly (stod(diemm));
                             break;
                         case 'I':
-                            sv1.diem.tin = stod(diemm);
+                            sv1.setdiemtin (stod(diemm));
                             break;
                         case 'R':
-                            sv1.diem.triet = stod(diemm);
+                            sv1.setdiemtriet (stod(diemm));
                             break;
                         case 'A':
-                            sv1.diem.anhVan = stod(diemm);
+                            sv1.setdiemanhVan (stod(diemm));
                             break;
                         default:
                             cout << "Du lieu nhap khong hop le.";
@@ -736,7 +740,7 @@ void danhsachsinhvien::suaSV()
                         }
                         }
                         // tính lại điểm trung bình và học bổng sau khi thay đổi điểm.
-                        sv1.diem.tinhDTBvaHB();
+                        sv1.getdiem().tinhDTBvaHB();
                         break;
                     default: {
                         cout << "\n\t\t\tLua chon khong ton tai...";
@@ -747,13 +751,13 @@ void danhsachsinhvien::suaSV()
                 fileOut.open("txtsinhvien.txt", ios::out);
                 fileOut1.open("txtdiemso.txt", ios::out);
 
-                for (int i = 1; i < soLuongSV; i++)
+                for (int i = 0; i < soLuongSV; i++)
                 {
-                    fileOut << list[i].maSV << "," << list[i].hoTen << "," << list[i].ngaySinh << "," << list[i].gioiTinh << "," << list[i].lop << ","
-                            << list[i].sdt << "," << list[i].maKhoa << "," << list[i].queQuan << endl;
+                    fileOut << list[i].getmaSV() << "," << list[i].gethoTen() << "," << list[i].getngaySinh() << "," << list[i].getgioiTinh() << "," << list[i].getlop() << ","
+                            << list[i].getsdt() << "," << list[i].getmaKhoa() << "," << list[i].getqueQuan() << endl;
 
-                    fileOut1 << list[i].maSV << "," << list[i].diem.toan << "," << list[i].diem.ly << "," << list[i].diem.tin << ","
-                             << list[i].diem.triet << "," << list[i].diem.anhVan << endl;
+                    fileOut1 << list[i].getmaSV() << "," << list[i].getdiem().gettoan() << "," << list[i].getdiem().getly() << "," << list[i].getdiem().gettin() << ","
+                             << list[i].getdiem().gettriet() << "," << list[i].getdiem().getanhVan() << endl;
                 }
                 fileOut.close();
                 fileOut1.close();
@@ -800,7 +804,8 @@ void danhsachsinhvien::xoaSV()
             getline(cin >> ws, masv);
             break;
         case 2:
-            timKiemSV(); //tìm kiếm và hiển thị danh sách tìm kiếm (có mã sinh viên).
+            //tìm kiếm và hiển thị danh sách tìm kiếm (có mã sinh viên).
+            timKiemSV(); 
             cout << "Ma sinh vien : ";
             getline(cin >> ws, masv);
             break;
@@ -839,13 +844,13 @@ void danhsachsinhvien::xoaSV()
                 fileOut.open("txtsinhvien.txt", ios::out);
                 fileOut1.open("txtdiemso.txt", ios::out);
 
-                for (int i = 1; i < soLuongSV; i++)
+                for (int i = 0; i < soLuongSV; i++)
                 {
-                    fileOut << list[i].maSV << "," << list[i].hoTen << "," << list[i].ngaySinh << "," << list[i].gioiTinh << "," << list[i].lop << ","
-                            << list[i].sdt << "," << list[i].maKhoa << "," << list[i].queQuan << endl;
+                    fileOut << list[i].getmaSV() << "," << list[i].gethoTen() << "," << list[i].getngaySinh() << "," << list[i].getgioiTinh() << "," << list[i].getlop() << ","
+                            << list[i].getsdt() << "," << list[i].getmaKhoa() << "," << list[i].getqueQuan() << endl;
 
-                    fileOut1 << list[i].maSV << "," << list[i].diem.toan << "," << list[i].diem.ly << "," << list[i].diem.tin << ","
-                             << list[i].diem.triet << "," << list[i].diem.anhVan << endl;
+                    fileOut1 << list[i].getmaSV() << "," << list[i].getdiem().gettoan() << "," << list[i].getdiem().getly() << "," << list[i].getdiem().gettin() << ","
+                             << list[i].getdiem().gettriet() << "," << list[i].getdiem().getanhVan() << endl;
                 }
                 fileOut.close();
                 fileOut1.close();
@@ -863,7 +868,7 @@ void danhsachsinhvien::xoaSVtheomaSV(string masv)
 {
     for (int i = 0; i < soLuongSV; i++)
     {
-        if (list[i].maSV == masv)
+        if (list[i].getmaSV() == masv)
         {
             for (int j = i; j < soLuongSV - 1; j++)
             {
@@ -964,13 +969,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].lop.compare(0, 2, list[i + 1].lop, 0, 2) == 0 && i < soLuongSV - 1)
+                    while (list[i].getlop().compare(0, 2, list[i + 1].getlop(), 0, 2) == 0 && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(15) << list[i].lop.substr(0, 2) << setw(15) << dem;
-                    cout << setw(15) << list[i].lop.substr(0, 2) << setw(15) << dem;
+                    fileOut << setw(15) << list[i].getlop().substr(0, 2) << setw(15) << dem;
+                    cout << setw(15) << list[i].getlop().substr(0, 2) << setw(15) << dem;
                     tmpkhoa.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -994,13 +999,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].lop == list[i + 1].lop && i < soLuongSV - 1)
+                    while (list[i].getlop() == list[i + 1].getlop() && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(15) << list[i].lop << setw(15) << dem;
-                    cout << setw(15) << list[i].lop << setw(15) << dem;
+                    fileOut << setw(15) << list[i].getlop() << setw(15) << dem;
+                    cout << setw(15) << list[i].getlop() << setw(15) << dem;
                     tmp.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1015,7 +1020,7 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
             case 5:
             {
                 fileOut<<"-------------------------------------------------------------------------------------------\n"; 
-                fileOut<<"\nThong ke ve quy mo cua moi lop.\n";
+                fileOut<<"\nThong ke ve quy mo cua moi tinh, thanh pho.\n";
                 static danhsachsinhvien tmptinh;
                 sxtheoqueQuan();
                 fileOut << endl
@@ -1025,13 +1030,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].queQuan == list[i + 1].queQuan && i < soLuongSV - 1)
+                    while (list[i].getqueQuan() == list[i + 1].getqueQuan() && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(25) << list[i].queQuan << setw(15) << dem;
-                    cout << setw(25) << list[i].queQuan << setw(15) << dem;
+                    fileOut << setw(25) << list[i].getqueQuan() << setw(15) << dem;
+                    cout << setw(25) << list[i].getqueQuan() << setw(15) << dem;
                     tmptinh.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1134,13 +1139,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].lop.compare(0, 2, list[i + 1].lop, 0, 2) == 0 && i < soLuongSV - 1)
+                    while (list[i].getlop().compare(0, 2, list[i + 1].getlop(), 0, 2) == 0 && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(15) << list[i].lop.substr(0, 2) << setw(15) << dem;
-                    cout << setw(15) << list[i].lop.substr(0, 2) << setw(15) << dem;
+                    fileOut << setw(15) << list[i].getlop().substr(0, 2) << setw(15) << dem;
+                    cout << setw(15) << list[i].getlop().substr(0, 2) << setw(15) << dem;
                     tmpkhoa.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1158,7 +1163,6 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 fileOut<<"-------------------------------------------------------------------------------------------\n"; 
                 fileOut<<"\nThong ke ve xep loai sinh vien moi lop.\n"; 
                 static danhsachsinhvien tmp;
-                //thong ke so nam nu moi lop
                 sxtheolop();
                 
                 fileOut << endl
@@ -1170,13 +1174,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].lop == list[i + 1].lop && i < soLuongSV - 1)
+                    while (list[i].getlop() == list[i + 1].getlop() && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(15) << list[i].lop << setw(15) << dem ;
-                    cout << setw(15) << list[i].lop << setw(15) << dem ;
+                    fileOut << setw(15) << list[i].getlop() << setw(15) << dem ;
+                    cout << setw(15) << list[i].getlop() << setw(15) << dem ;
                     tmp.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1196,7 +1200,6 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 fileOut<<"\nThong ke ve xep loai sinh vien moi tinh, thanh pho.\n"; 
                 static danhsachsinhvien 
                 tmptinh;
-                //thong ke so nam nu moi lop
                 sxtheoqueQuan();
                 fileOut << endl
                      << setw(25) << "Tinh" << setw(15) << "Tong so sv" << setw(15) << "Gioi" << setw(15)
@@ -1207,13 +1210,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].queQuan == list[i + 1].queQuan && i < soLuongSV - 1)
+                    while (list[i].getqueQuan() == list[i + 1].getqueQuan() && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(25) << list[i].queQuan << setw(15) << dem;
-                    cout << setw(25) << list[i].queQuan << setw(15) << dem;
+                    fileOut << setw(25) << list[i].getqueQuan() << setw(15) << dem;
+                    cout << setw(25) << list[i].getqueQuan() << setw(15) << dem;
                     tmptinh.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1310,13 +1313,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].lop.compare(0, 2, list[i + 1].lop, 0, 2) == 0 && i < soLuongSV - 1)
+                    while (list[i].getlop().compare(0, 2, list[i + 1].getlop(), 0, 2) == 0 && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(15) << list[i].lop.substr(0, 2) << setw(15) << dem;
-                    cout << setw(15) << list[i].lop.substr(0, 2) << setw(15) << dem;
+                    fileOut << setw(15) << list[i].getlop().substr(0, 2) << setw(15) << dem;
+                    cout << setw(15) << list[i].getlop().substr(0, 2) << setw(15) << dem;
                     tmpkhoa.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1344,13 +1347,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].lop == list[i + 1].lop && i < soLuongSV - 1)
+                    while (list[i].getlop() == list[i + 1].getlop() && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(20) << list[i].lop << setw(15) << dem;
-                    cout << setw(20) << list[i].lop << setw(15) << dem;
+                    fileOut << setw(20) << list[i].getlop() << setw(15) << dem;
+                    cout << setw(20) << list[i].getlop() << setw(15) << dem;
                     tmp.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1379,13 +1382,13 @@ void danhsachsinhvien::thongKeSV(cackhoa &CK)
                 for (int i = 0; i < soLuongSV; i++)
                 {
                     int dem = 1;
-                    while (list[i].queQuan == list[i + 1].queQuan && i < soLuongSV - 1)
+                    while (list[i].getqueQuan() == list[i + 1].getqueQuan() && i < soLuongSV - 1)
                     {
                         dem++;
                         i++;
                     }
-                    fileOut << setw(25) << list[i].queQuan << setw(15) << dem;
-                    cout << setw(25) << list[i].queQuan << setw(15) << dem;
+                    fileOut << setw(25) << list[i].getqueQuan() << setw(15) << dem;
+                    cout << setw(25) << list[i].getqueQuan() << setw(15) << dem;
                     tmptinh.soLuongSV = dem;
                     for (int j = i; dem > 0; j--)
                     {
@@ -1424,7 +1427,7 @@ int danhsachsinhvien::demgioiTinh(bool b)
     int dem = 0;
     for (int i = 0; i < soLuongSV; i++)
     {
-        if (list[i].gioiTinh == b)
+        if (list[i].getgioiTinh() == b)
             dem++;
     }
     return dem;
@@ -1444,9 +1447,8 @@ int danhsachsinhvien::demhocBong(int b)
     int dem = 0;
     for (int i = 0; i < soLuongSV; i++)
     {
-        if (list[i].diem.hocBong == b)
+        if (list[i].getdiem().gethocBong() == b)
             dem++;
     }
     return dem;
 }
-

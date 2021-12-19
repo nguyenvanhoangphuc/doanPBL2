@@ -41,3 +41,45 @@ diemso &diemso::operator=(const diemso &x) {
     this->hocBong=x.hocBong;
     return *this; 
 }
+float diemso::gettoan() {
+    return this->toan;
+}
+float diemso::getly() {
+    return this->ly;
+}
+float diemso::gettin() {
+    return this->tin;
+}
+float diemso::gettriet() {
+    return this->triet;
+}
+float diemso::getanhVan() {
+    return this->anhVan;
+}
+float diemso::getdtb() {
+    return this->dtb;
+}
+int diemso::gethocBong() {
+    return this->hocBong; 
+}
+void diemso::settoan(float x) {
+    this->toan=x;
+}
+void diemso::setly(float x) {
+    this->ly=x;
+}
+void diemso::settin(float x){
+    this->tin=x;
+}
+void diemso::settriet(float x){
+    this->triet=x;
+}
+void diemso::setanhVan(float x){
+    this->anhVan=x;
+}
+void diemso::setdtb(float x) {
+    this->dtb=x;
+}
+void diemso::sethocBong(int x){
+    this->hocBong=x;
+}

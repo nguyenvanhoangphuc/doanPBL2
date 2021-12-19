@@ -10,7 +10,6 @@ class cackhoa
 private:
     int soLuongKhoa;
     khoa *listKhoa;
-
 public:
     cackhoa();
     ~cackhoa();

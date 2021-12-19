@@ -160,35 +160,34 @@ void SinhVien::Nhap()
         cout << "\t\t\tNhap diem toan (max 10): ";
         getline(cin >> ws, str_temp);
     } while (!check_float(str_temp) || (stod(str_temp) > 10));
-    diem.toan = stod(str_temp);
-
+    diem.settoan(stod(str_temp));
     do
     {
         cout << "\t\t\tNhap diem ly (max 10): ";
         getline(cin >> ws, str_temp);
     } while (!check_float(str_temp) || (stod(str_temp) > 10));
-    diem.ly = stod(str_temp);
+    diem.setly( stod(str_temp));
 
     do
     {
         cout << "\t\t\tNhap diem tin (max 10): ";
         getline(cin >> ws, str_temp);
     } while (!check_float(str_temp) || (stod(str_temp) > 10));
-    diem.tin = stod(str_temp);
+    diem.settin (stod(str_temp));
 
     do
     {
         cout << "\t\t\tNhap diem triet (max 10): ";
         getline(cin >> ws, str_temp);
     } while (!check_float(str_temp) || (stod(str_temp) > 10));
-    diem.triet = stod(str_temp);
+    diem.settriet (stod(str_temp));
 
     do
     {
         cout << "\t\t\tNhap diem anh van (max 10): ";
         getline(cin >> ws, str_temp);
     } while (!check_float(str_temp) || (stod(str_temp) > 10));
-    diem.anhVan = stod(str_temp);
+    diem.setanhVan (stod(str_temp));
 
     fstream fileOut, fileOut1;
     fileOut.open("txtsinhvien.txt", ios::app | ios::out);
@@ -197,18 +196,18 @@ void SinhVien::Nhap()
         << maSV << "," << hoTen << "," << ngaySinh << "," << gioiTinh << "," << lop << ","
         << sdt << "," << maKhoa << "," << queQuan << endl;
     fileOut1
-        << maSV << "," << diem.toan << "," << diem.ly << "," << diem.tin << ","
-        << diem.triet << "," << diem.anhVan << endl;
+        << maSV << "," << diem.gettoan() << "," << diem.getly() << "," << diem.gettin() << ","
+        << diem.gettriet() << "," << diem.getanhVan() << endl;
     fileOut.close();
     fileOut1.close();
 }
 string SinhVien::xepLoai()
 {
-    if (diem.dtb >= 8.5)
+    if (diem.getdtb() >= 8.5)
         return "gioi";
-    if (diem.dtb >= 7)
+    if (diem.getdtb() >= 7)
         return "kha";
-    if (diem.dtb >= 5)
+    if (diem.getdtb() >= 5)
         return "tbinh";
     return "yeu";
 }
@@ -225,3 +224,69 @@ SinhVien &SinhVien::operator=(const SinhVien &x)
     this->diem = x.diem;
     return *this;
 }
+string SinhVien::getmaSV() {
+    return this->maSV;
+}
+string SinhVien::gethoTen() {
+    return this->hoTen;
+}
+string SinhVien::getngaySinh() {
+    return this->ngaySinh;
+}
+string SinhVien::getlop() {
+    return this->lop;
+}
+string SinhVien::getsdt() {
+    return this->sdt;
+}
+string SinhVien::getmaKhoa() {
+    return this->maKhoa;
+}
+string SinhVien::getqueQuan() {
+    return this->queQuan;
+}
+bool SinhVien::getgioiTinh() {
+    return this->gioiTinh; 
+}
+diemso SinhVien::getdiem() {
+    return this->diem; 
+}
+void SinhVien::setmaSV(string s) {
+    this->maSV =s; 
+}
+void SinhVien::sethoTen(string s) {
+    this->hoTen=s; 
+}
+void SinhVien::setngaySinh(string s){
+    this->ngaySinh=s; 
+}
+void SinhVien::setlop(string s){
+    this->lop=s; 
+}
+void SinhVien::setsdt(string s){
+    this->sdt=s; 
+}
+void SinhVien::setmaKhoa(string s){
+    this->maKhoa=s; 
+}
+void SinhVien::setqueQuan(string s){
+    this->queQuan=s; 
+}
+void SinhVien::setgioiTinh(bool b) {
+    this->gioiTinh=b;
+}
+void SinhVien::setdiemtoan(int x) {
+    this->diem.settoan(x); 
+} 
+void SinhVien::setdiemly(int x) {
+    this->diem.setly(x); 
+} 
+void SinhVien::setdiemtin(int x) {
+    this->diem.settin(x); 
+} 
+void SinhVien::setdiemtriet(int x) {
+    this->diem.settriet(x); 
+} 
+void SinhVien::setdiemanhVan(int x) {
+    this->diem.setanhVan(x); 
+} 
